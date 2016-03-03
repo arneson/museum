@@ -53,4 +53,8 @@ public class Quiz extends AbstractEntity {
     public String toString() {
         return "Quiz{" + "name=" + name+'}';
     }
+
+    public void addQuestion(Question question) {
+        this.questions.add(question);
+    }
 }

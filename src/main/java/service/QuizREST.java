@@ -5,6 +5,8 @@
  */
 package service;
 
+import com.ssv.museum.core.AnswerOption;
+import com.ssv.museum.core.Question;
 import com.ssv.museum.core.Quiz;
 import com.ssv.museum.persistence.QuizDAO;
 import java.util.ArrayList;
@@ -13,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -92,6 +95,53 @@ public class QuizREST {
         quizDAO.create(newQuiz);
         if (newQuiz != null) {
             return Response.ok(newQuiz).build(); // 200
+        } else {
+            return Response.noContent().build();  // 204
+        }
+    }
+   //update
+   @PUT
+   @Path("{id: \\d+}")
+   @Produces({MediaType.APPLICATION_JSON})
+   @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+   public Response update(@PathParam("id") Long id,
+                          JsonObject obj,@Context Request request) {
+       String name = obj.getString("name");
+       int points = obj.getJsonNumber("points").intValue();
+       String description = obj.getString("description");
+       Quiz q = quizDAO.find(id);
+       if (q != null) {
+           q.setName(name);
+           q.setPoints(points);
+           q.setDescription(description);
+           quizDAO.update(q);
+           return Response.ok(q).build(); // 200
+       } else {
+           return Response.noContent().build();  // 204
+       }
+   }
+    
+    //addQuestion
+    @POST
+    @Path("{id: \\d+}/questions")
+    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+    public Response addQuestion(JsonObject obj,
+                        @PathParam("id") Long id,
+                        @Context Request request) {
+        int points = obj.getJsonNumber("points").intValue();
+        String description = obj.getString("description");
+        JsonArray opts = obj.getJsonArray("options");
+        AnswerOption correctOption = new AnswerOption(obj.getJsonObject("correct").getString("text"));
+        List<AnswerOption> options = new ArrayList<>();
+        for(int o = 0;o<opts.size();o++){
+            options.add(new AnswerOption(opts.getJsonObject(o).getString("text")));
+        }
+        Quiz quiz = quizDAO.find(id);
+        quiz.addQuestion(new Question(description,points, options, correctOption));
+        quizDAO.update(quiz);
+        if (quiz != null) {
+            return Response.ok(quiz).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
