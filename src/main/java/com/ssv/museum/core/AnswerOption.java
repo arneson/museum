@@ -1,6 +1,6 @@
 /**
  * Class representing an option (possible answer) for a question
- * @author simonarneson
+ * @author larssonvictor
  */
 package com.ssv.museum.core;
 

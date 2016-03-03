@@ -52,6 +52,10 @@ public class Question extends AbstractEntity {
         this(question, points,options,correctOption);
         this.media = media;
     }
+    
+    public boolean checkAnswer(AnswerOption answer){
+        return correctOption == answer;
+    }
 
     @Override
     public String toString() {

@@ -32,6 +32,9 @@ public class Visitor extends AbstractEntity {
     private String imageUrl;
     @Setter
     @Getter
+    private int totalPoints;
+    @Setter
+    @Getter
     @OneToMany
     private List<Answer> answers = new ArrayList<>();
     @Setter
@@ -45,6 +48,7 @@ public class Visitor extends AbstractEntity {
     public Visitor(String username, String fbId) {
         this.username = username;
         this.fbId = fbId;
+        this.totalPoints = 0;
     }
 
     public Visitor(String username, String fbId, String city, String mail, String imageUrl, List<Answer> answers) {
@@ -58,5 +62,13 @@ public class Visitor extends AbstractEntity {
     @Override
     public String toString() {
         return "User{" + "User=" + username +'}';
+    }
+
+    public void addAnswer(Answer answer) {
+        answers.add(answer);
+    }
+
+    public void addPoints(int points) {
+       totalPoints += points;
     }
 }
