@@ -28,6 +28,10 @@ public class VisitorDAO extends AbstractDAO<Visitor, Long> {
     protected EntityManager getEntityManager() {
         return em;
     }
+
+    public Visitor findByFbId(String facebookId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
 
