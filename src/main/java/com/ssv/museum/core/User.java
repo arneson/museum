@@ -1,6 +1,5 @@
 /**
- * Class representing an option (possible answer) for a question
- * @author simonarneson
+ * @author larssonvictor
  */
 package com.ssv.museum.core;
 
@@ -8,6 +7,7 @@ import com.ssv.museum.persistence.AbstractEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +32,8 @@ public class User extends AbstractEntity {
     private String imageUrl;
     @Setter
     @Getter
-    private List<Answer> answers = new ArrayList<Answer>();
+    @OneToMany
+    private List<Answer> answers = new ArrayList<>();
 
     public User() {
     }
@@ -52,6 +53,6 @@ public class User extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "User{" + "User=" + username.toString()+'}';
+        return "User{" + "User=" + username+'}';
     }
 }

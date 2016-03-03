@@ -1,12 +1,13 @@
 /**
- * Class representing an option (possible answer) for a question
- * @author simonarneson
+ * @author larssonvictor
  */
 package com.ssv.museum.core;
 
 import com.ssv.museum.persistence.AbstractEntity;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,29 +17,32 @@ import lombok.Setter;
 public class Answer extends AbstractEntity {
     @Setter
     @Getter
+    @OneToOne
     private Option option;
     @Setter
     @Getter
-    private boolean result;
+    private boolean wasCorrect;
     @Setter
     @Getter
-    private Date date;
+    @Temporal(javax.persistence.TemporalType.DATE)
+    private Date dateAnswered;
     @Setter
     @Getter
+    @OneToOne
     private Position position;
 
     public Answer() {
     }
 
-    public Answer(Option option, boolean result, Date date, Position position) {
-        this.option   = option;
-        this.result   = result;
-        this.date     = date;
-        this.position = position;
+    public Answer(Option option, boolean wasCorrect, Date dateAnswered, Position position) {
+        this.option       = option;
+        this.wasCorrect   = wasCorrect;
+        this.dateAnswered = dateAnswered;
+        this.position     = position;
     }
 
     @Override
     public String toString() {
-        return "Answer{" + "Answer=" + option.toString()+'}';
+        return "Answer{" + "Answer=" + option.toString()+ "Correct="+ wasCorrect+'}';
     }
 }
