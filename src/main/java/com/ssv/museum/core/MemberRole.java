@@ -9,6 +9,6 @@ package com.ssv.museum.core;
  *
  * @author simonarneson
  */
-public enum Role {
+public enum MemberRole {
     ADMIN,MEMBER
 }

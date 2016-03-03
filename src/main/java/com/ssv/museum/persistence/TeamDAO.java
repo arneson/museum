@@ -5,23 +5,23 @@
  */
 package com.ssv.museum.persistence;
 
-import com.ssv.museum.core.Visitor;
+import com.ssv.museum.core.Team;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
  *
- * @author larssonvictor
+ * @author simonarneson
  */
 @Stateless
-public class UserDAO extends AbstractDAO<Visitor, Long> {
+public class TeamDAO extends AbstractDAO<Team, Long> {
 
     @PersistenceContext
     private EntityManager em;
     
-    public UserDAO(){
-        super(Visitor.class);
+    public TeamDAO(){
+        super(Team.class);
     }
     
     @Override
