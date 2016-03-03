@@ -26,10 +26,9 @@ public abstract class AuthedREST {
     MuseumDAO museumDAO = lookupMuseumDAOBean();
     
     private static final String SALT = "javascriptärsvinnice";
-    public boolean authVisitor(String accessToken, Long userId){
+    public boolean authVisitor(String at, Long userId){
         
-        //auth against fb
-        String fbId = "";
+        String fbId = getFacebookUserID(at);
         Visitor v = visitorDAO.findByFbId(fbId);
         if(v.getId().equals(userId)){
             return true;
@@ -60,6 +59,9 @@ public abstract class AuthedREST {
         }
 
         return hash.toString();
+    }
+    public String getFacebookUserID(String at) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     private MuseumDAO lookupMuseumDAOBean() {

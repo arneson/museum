@@ -5,8 +5,9 @@
  */
 package service;
 
+import com.ssv.museum.core.Museum;
 import com.ssv.museum.core.Visitor;
-import com.ssv.museum.persistence.VisitorDAO;
+import com.ssv.museum.persistence.MuseumDAO;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.json.JsonObject;
@@ -31,21 +32,20 @@ import javax.ws.rs.core.Response;
  * @author simonarneson
  */
 @Path("visitor")
-public class VisitorREST extends AuthedREST {
+public class MuseumREST extends AuthedREST {
     
     //DAO
-    VisitorDAO visitorDAO = lookupVisitorDAOBean();
+    MuseumDAO museumDAO = lookupMuseumDAOBean();
     
     //find
     @GET
     @Path("{id: \\d+}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response find(@PathParam("id") Long id,
-            @HeaderParam("access-token") String at,
             @Context Request request) {
-        Visitor v = visitorDAO.find(id);
-        if (authVisitor(at,id) && v != null) {
-            return Response.ok(v).build(); // 200
+        Museum m = museumDAO.find(id);
+        if ( m != null) {
+            return Response.ok(m).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -56,12 +56,12 @@ public class VisitorREST extends AuthedREST {
     @Path("{id: \\d+}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response delete(@PathParam("id") Long id,
-                         @HeaderParam("access-token") String at,
+                         @HeaderParam("password") String password,
                          @Context Request request) {
         //to be able to check if exists
-        Visitor v = visitorDAO.find(id);
-        if (authVisitor(at,id) && v != null) {
-            visitorDAO.delete(id);
+        Museum v = museumDAO.find(id);
+        if (authMuseum(password,v.getUsername()) && v != null) {
+            museumDAO.delete(id);
             return Response.ok(v).build(); // 200
         } else {
             return Response.noContent().build();  // 204
@@ -76,12 +76,13 @@ public class VisitorREST extends AuthedREST {
     public Response signup(JsonObject obj,
                          @Context Request request) {
         String name = obj.getString("name");
-        String at = obj.getString("access_token");
-        String facebookId = getFacebookUserID(at);
-        if (facebookId!=null) {
-            Visitor newVisitor = new Visitor(name, facebookId);
-            visitorDAO.create(newVisitor);
-            return Response.ok(newVisitor).build(); // 200
+        String username = obj.getString("username");
+        String password = obj.getString("password");
+        if (password!=null && password.length()>3 && username.length()>2) {
+            password = generateHash(saltPassword(password));
+            Museum newMuseum = new Museum(username, password,name);
+            museumDAO.create(newMuseum);
+            return Response.ok(newMuseum).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -130,10 +131,10 @@ public class VisitorREST extends AuthedREST {
        }
    }
     
-    private VisitorDAO lookupVisitorDAOBean() {
+    private MuseumDAO lookupMuseumDAOBean() {
         try {
             javax.naming.Context c = new InitialContext();
-            return (VisitorDAO) c.lookup("java:global/Museum/VisitorDAO!com.ssv.museum.persistence.VisitorDAO");
+            return (MuseumDAO) c.lookup("java:global/Museum/MuseumDAO!com.ssv.museum.persistence.MuseumDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

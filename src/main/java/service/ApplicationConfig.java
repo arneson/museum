@@ -29,6 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(service.MuseumREST.class);
         resources.add(service.QuizREST.class);
         resources.add(service.TeamREST.class);
         resources.add(service.VisitorREST.class);

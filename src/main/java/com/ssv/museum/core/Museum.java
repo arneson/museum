@@ -46,10 +46,14 @@ public class Museum extends AbstractEntity {
     }
 
     public Museum(String username, String password, String name, Address address, String image) {
-        this(username, password);
-        this.name = name;
+        this(username, password,name);
         this.address = address;
         this.image = image;
+    }
+
+    public Museum(String username, String password,String name) {
+        this(username,password);
+        this.name = name;
     }
     
     @Override
