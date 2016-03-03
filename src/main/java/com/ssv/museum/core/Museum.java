@@ -7,6 +7,8 @@ import com.ssv.museum.persistence.AbstractEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,13 +27,15 @@ public class Museum extends AbstractEntity {
     private String name;
     @Setter
     @Getter
+    @OneToOne
     private Address address;
     @Setter
     @Getter
     private String image;
     @Setter
     @Getter
-    private List<Quiz> answers = new ArrayList<Quiz>();
+    @OneToMany
+    private List<Quiz> quiz = new ArrayList<>();
 
     public Museum() {
     }

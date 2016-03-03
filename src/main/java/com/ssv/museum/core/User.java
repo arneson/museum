@@ -34,6 +34,10 @@ public class User extends AbstractEntity {
     @Getter
     @OneToMany
     private List<Answer> answers = new ArrayList<>();
+    @Setter
+    @Getter
+    @OneToMany
+    private List<CompletedQuiz> completedQuizzes = new ArrayList<>();
 
     public User() {
     }
@@ -53,6 +57,6 @@ public class User extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "User{" + "User=" + username+'}';
+        return "User{" + "User=" + username +'}';
     }
 }
