@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,13 +26,15 @@ public class Quiz extends AbstractEntity {
     private int points;
     @Setter
     @Getter
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date created;
     @Setter
     @Getter
     private String description;
     @Setter
     @Getter
-    private List<Question> questions = new ArrayList<Question>();
+    @OneToMany
+    private List<Question> questions = new ArrayList<>();
             
     public Quiz() {
     }

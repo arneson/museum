@@ -5,7 +5,7 @@
  */
 package com.ssv.museum.persistence;
 
-import com.ssv.museum.core.User;
+import com.ssv.museum.core.Visitor;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,13 +15,13 @@ import javax.persistence.PersistenceContext;
  * @author larssonvictor
  */
 @Stateless
-public class UserDAO extends AbstractDAO<User, Long> {
+public class UserDAO extends AbstractDAO<Visitor, Long> {
 
     @PersistenceContext
     private EntityManager em;
     
     public UserDAO(){
-        super(User.class);
+        super(Visitor.class);
     }
     
     @Override

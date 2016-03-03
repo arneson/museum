@@ -5,7 +5,7 @@
  */
 package com.ssv.museum.persistence;
 
-import com.ssv.museum.core.Group;
+import com.ssv.museum.core.Team;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,13 +15,13 @@ import javax.persistence.PersistenceContext;
  * @author simonarneson
  */
 @Stateless
-public class GroupDAO extends AbstractDAO<Group, Long> {
+public class GroupDAO extends AbstractDAO<Team, Long> {
 
     @PersistenceContext
     private EntityManager em;
     
     public GroupDAO(){
-        super(Group.class);
+        super(Team.class);
     }
     
     @Override

@@ -8,6 +8,8 @@ import com.ssv.museum.persistence.AbstractEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,27 +25,30 @@ public class Question extends AbstractEntity {
     private int points;
     @Setter
     @Getter
-    private List<Option> options = new ArrayList<Option>();
+    @OneToMany
+    private List<AnswerOption> options = new ArrayList<>();
     @Setter
     @Getter
-    private List<Media> media =  new ArrayList<Media>();
+    @OneToMany
+    private List<Media> media =  new ArrayList<>();
     @Setter
     @Getter
-    private Option correctOption;
+    @OneToOne
+    private AnswerOption correctOption;
 
     public Question() {
     }
 
-    public Question(String question,int points, List<Option> options, Option correctOption) {
+    public Question(String question,int points, List<AnswerOption> options, AnswerOption correctOption) {
         this.question = question;
         this.points = points;
         this.options = options;
         this.correctOption = correctOption;
     }
-    public Question(String question, List<Option> options, Option correctOption) {
+    public Question(String question, List<AnswerOption> options, AnswerOption correctOption) {
         this(question, 1,options,correctOption);
     }
-    public Question(String question,int points, List<Option> options, Option correctOption, List<Media> media) {
+    public Question(String question,int points, List<AnswerOption> options, AnswerOption correctOption, List<Media> media) {
         this(question, points,options,correctOption);
         this.media = media;
     }

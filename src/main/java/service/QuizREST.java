@@ -101,7 +101,7 @@ public class QuizREST {
     private QuizDAO lookupQuizDAOBean() {
         try {
             javax.naming.Context c = new InitialContext();
-            return (QuizDAO) c.lookup("java:global/com.mycompany_Museum_war_1.0-SNAPSHOT/QuizDAO!com.ssv.museum.persistence.QuizDAO");
+            return (QuizDAO) c.lookup("java:global/Museum/QuizDAO!com.ssv.museum.persistence.QuizDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

@@ -14,7 +14,7 @@ import lombok.Setter;
 
 @Entity
 @XmlRootElement
-public class User extends AbstractEntity {
+public class Visitor extends AbstractEntity {
     @Setter
     @Getter
     private String username;
@@ -39,15 +39,15 @@ public class User extends AbstractEntity {
     @OneToMany
     private List<CompletedQuiz> completedQuizzes = new ArrayList<>();
 
-    public User() {
+    public Visitor() {
     }
 
-    public User(String username, String fbId) {
+    public Visitor(String username, String fbId) {
         this.username = username;
         this.fbId = fbId;
     }
 
-    public User(String username, String fbId, String city, String mail, String imageUrl, List<Answer> answers) {
+    public Visitor(String username, String fbId, String city, String mail, String imageUrl, List<Answer> answers) {
         this(username, fbId);
         this.city = city;
         this.mail = mail;

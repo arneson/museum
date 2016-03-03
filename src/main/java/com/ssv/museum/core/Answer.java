@@ -18,7 +18,7 @@ public class Answer extends AbstractEntity {
     @Setter
     @Getter
     @OneToOne
-    private Option option;
+    private AnswerOption answerOption;
     @Setter
     @Getter
     private boolean wasCorrect;
@@ -34,8 +34,8 @@ public class Answer extends AbstractEntity {
     public Answer() {
     }
 
-    public Answer(Option option, boolean wasCorrect, Date dateAnswered, Position position) {
-        this.option       = option;
+    public Answer(AnswerOption option, boolean wasCorrect, Date dateAnswered, Position position) {
+        this.answerOption       = option;
         this.wasCorrect   = wasCorrect;
         this.dateAnswered = dateAnswered;
         this.position     = position;
@@ -43,6 +43,6 @@ public class Answer extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "Answer{" + "Answer=" + option.toString()+ "Correct="+ wasCorrect+'}';
+        return "Answer{" + "Answer=" + answerOption.toString()+ "Correct="+ wasCorrect+'}';
     }
 }

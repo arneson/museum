@@ -12,15 +12,15 @@ import lombok.Setter;
 
 @Entity
 @XmlRootElement
-public class Option extends AbstractEntity {
+public class AnswerOption extends AbstractEntity {
     @Setter
     @Getter
     private String text;
 
-    public Option() {
+    public AnswerOption() {
     }
 
-    public Option(String text) {
+    public AnswerOption(String text) {
         this.text = text;
     }
 

@@ -8,13 +8,14 @@ import com.ssv.museum.persistence.AbstractEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
 
 @Entity
 @XmlRootElement
-public class Group extends AbstractEntity {
+public class Team extends AbstractEntity {
     @Setter
     @Getter
     private String name;
@@ -23,28 +24,29 @@ public class Group extends AbstractEntity {
     private String description;
     @Setter
     @Getter
-    private List<Membership> members = new ArrayList<Membership>();
+    @OneToMany
+    private List<Membership> members = new ArrayList<>();
 
-    public Group() {
+    public Team() {
     }
-    public Group(String name) {
+    public Team(String name) {
         this.name = name;
     }
-    public Group(String name, String description) {
+    public Team(String name, String description) {
         this(name);
         this.description = description;
     }
-    public Group(String name, List<Membership> members) {
+    public Team(String name, List<Membership> members) {
         this(name);
         this.members = members;
     }
-    public Group(String name,String description, List<Membership> members) {
+    public Team(String name,String description, List<Membership> members) {
         this(name,description);
         this.members = members;
     }
 
     @Override
     public String toString() {
-        return "Group{" + "name=" + name+'}';
+        return "Team{" + "name=" + name+'}';
     }
 }
