@@ -5,6 +5,7 @@
 package com.ssv.museum.core;
 
 import com.ssv.museum.persistence.AbstractEntity;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -22,10 +23,10 @@ public class Question extends AbstractEntity {
     private int points;
     @Setter
     @Getter
-    private List<Option> options;
+    private List<Option> options = new ArrayList<Option>();
     @Setter
     @Getter
-    private List<Media> media;
+    private List<Media> media =  new ArrayList<Media>();
     @Setter
     @Getter
     private Option correctOption;
