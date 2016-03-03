@@ -35,7 +35,7 @@ public class Answer extends AbstractEntity {
     }
 
     public Answer(AnswerOption option, boolean wasCorrect, Date dateAnswered, Position position) {
-        this.answerOption       = option;
+        this.answerOption = option;
         this.wasCorrect   = wasCorrect;
         this.dateAnswered = dateAnswered;
         this.position     = position;
