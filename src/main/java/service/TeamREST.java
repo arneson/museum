@@ -105,6 +105,26 @@ public class TeamREST {
         }
     }
     
+    //update
+   @PUT
+   @Path("{id: \\d+}")
+   @Produces({MediaType.APPLICATION_JSON})
+   @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+   public Response update(@PathParam("id") Long id,
+                          JsonObject obj,@Context Request request) {
+       String name = obj.getString("name");
+       String description = obj.getString("description");
+       Team t = teamDAO.find(id);
+       if (t != null) {
+           t.setName(name);
+           t.setDescription(description);
+           teamDAO.update(t);
+           return Response.ok(t).build(); // 200
+       } else {
+           return Response.noContent().build();  // 204
+       }
+   }
+    
     //addMemeber
     @POST
     @Produces({MediaType.APPLICATION_JSON})
