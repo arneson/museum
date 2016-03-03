@@ -5,6 +5,7 @@ package com.ssv.museum.core;
 
 import com.ssv.museum.persistence.AbstractEntity;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,7 @@ public class Address extends AbstractEntity {
     private String country;
     @Setter
     @Getter
+    @OneToOne
     private Position position;
 
     public Address() {
