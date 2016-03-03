@@ -5,6 +5,7 @@
  */
 package service;
 
+import com.ssv.museum.core.Address;
 import com.ssv.museum.core.Museum;
 import com.ssv.museum.core.Visitor;
 import com.ssv.museum.persistence.MuseumDAO;
@@ -94,11 +95,10 @@ public class MuseumREST extends AuthedREST {
     @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     public Response login(JsonObject obj,
                          @Context Request request) {
-        String at = obj.getString("access_token");
-        String facebookId = getFacebookUserID(at);
-        if (facebookId!=null) {
-            Visitor v = visitorDAO.findByFbId(facebookId);
-            return Response.ok(v).build(); // 200
+        String password = obj.getString("password");
+        String username = obj.getString("username");
+        if (authMuseum(password,username)) {
+            return Response.ok(museumDAO.findByUsername(username)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -110,19 +110,23 @@ public class MuseumREST extends AuthedREST {
    @Produces({MediaType.APPLICATION_JSON})
    @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
    public Response update(@PathParam("id") Long id,
-                          @HeaderParam("access-token") String at,
+                          @HeaderParam("password") String password,
                           JsonObject obj,@Context Request request) {
+       String name = obj.getString("name");
        String username = obj.getString("username");
-       String city = obj.getString("city");
+       String description = obj.getString("description");
+       JsonObject jsonAddress = obj.getJsonObject("address");
+       Address adr = new Address(name, jsonAddress.getString("city"), jsonAddress.getString("country"));
        String email = obj.getString("email");
-       if(authVisitor(at,id)){
-            Visitor v = visitorDAO.find(id);
-            if (v != null) {
-                v.setCity(city);
-                v.setMail(email);
-                v.setUsername(username);
-                visitorDAO.update(v);
-                return Response.ok(v).build(); // 200
+       Museum m = museumDAO.find(id);
+       if (m != null) {
+            if(authMuseum(password,m.getUsername())){
+                m.setName(name);
+                m.setEmail(email);
+                m.setUsername(username);
+                m.setDescription(description);
+                museumDAO.update(m);
+                return Response.ok(m).build(); // 200
             } else {
                 return Response.noContent().build();  // 204
             }     

@@ -27,8 +27,14 @@ public class Museum extends AbstractEntity {
     private String name;
     @Setter
     @Getter
+    private String description;
+    @Setter
+    @Getter
     @OneToOne
     private Address address;
+    @Setter
+    @Getter
+    private String email;
     @Setter
     @Getter
     private String image;
@@ -40,19 +46,20 @@ public class Museum extends AbstractEntity {
     public Museum() {
     }
 
-    public Museum(String username, String password) {
+    public Museum(String username, String password, String email) {
         this.username = username;
         this.password = password;
+        this.email = email;
     }
 
-    public Museum(String username, String password, String name, Address address, String image) {
-        this(username, password,name);
+    public Museum(String username, String password, String email, String name, Address address, String image) {
+        this(username, password,email,name);
         this.address = address;
         this.image = image;
     }
 
-    public Museum(String username, String password,String name) {
-        this(username,password);
+    public Museum(String username, String password, String email,String name) {
+        this(username,password,email);
         this.name = name;
     }
     

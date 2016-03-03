@@ -29,11 +29,15 @@ public class Address extends AbstractEntity {
 
     public Address() {
     }
-
-    public Address(String street, String city, String country, Position position) {
+    
+    public Address(String street, String city, String country) {
         this.street = street;
         this.city = city;
         this.country = country;
+    }
+    
+    public Address(String street, String city, String country, Position position) {
+        this(street,city,country);
         this.position = position;
     }
 
