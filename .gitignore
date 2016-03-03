@@ -95,3 +95,5 @@ fabric.properties
 # Maven
 log/
 target/
+pom.xml
+nb-configuration.xml
