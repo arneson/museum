@@ -44,6 +44,10 @@ public class Team extends AbstractEntity {
         this(name,description);
         this.members = members;
     }
+    
+    public void addMember(Membership newMember){
+        members.add(newMember);
+    }
 
     @Override
     public String toString() {

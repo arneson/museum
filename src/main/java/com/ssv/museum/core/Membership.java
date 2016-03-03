@@ -1,5 +1,4 @@
 /**
- * Class representing an option (possible answer) for a question
  * @author simonarneson
  */
 package com.ssv.museum.core;
@@ -18,7 +17,7 @@ import lombok.Setter;
 public class Membership extends AbstractEntity {
     @Setter
     @Getter
-    private Role role;
+    private MemberRole memberRole;
     @Setter
     @Getter
     @ManyToOne
@@ -31,14 +30,14 @@ public class Membership extends AbstractEntity {
     public Membership() {
     }
 
-    public Membership(Visitor user, Role role) {
+    public Membership(Visitor user, MemberRole memberRole) {
         this.user = user;
-        this.role = role;
+        this.memberRole = memberRole;
         this.dateJoined = new Date();
     }
 
     @Override
     public String toString() {
-        return "Membership{" + "user=" + user.toString()+" role="+role.toString()+'}';
+        return "Membership{" + "user=" + user.toString()+" role="+memberRole.toString()+'}';
     }
 }
