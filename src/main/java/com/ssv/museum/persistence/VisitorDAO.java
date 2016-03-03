@@ -30,7 +30,8 @@ public class VisitorDAO extends AbstractDAO<Visitor, Long> {
     }
 
     public Visitor findByFbId(String facebookId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return em.createQuery("SELECT * FROM visitor WHERE fbid = "+facebookId, Visitor.class)
+                .getSingleResult();
     }
     
 }

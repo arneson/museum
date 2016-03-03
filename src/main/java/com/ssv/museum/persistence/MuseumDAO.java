@@ -28,6 +28,11 @@ public class MuseumDAO extends AbstractDAO<Museum, Long> {
     protected EntityManager getEntityManager() {
         return em;
     }
+
+    public Museum findByUsername(String username) {
+         return em.createQuery("SELECT * FROM museum WHERE username = "+username, Museum.class)
+                .getSingleResult();
+    }
     
 }
 
