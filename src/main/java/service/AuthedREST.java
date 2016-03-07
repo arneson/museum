@@ -5,6 +5,9 @@
  */
 package service;
 
+import com.restfb.DefaultFacebookClient;
+import com.restfb.FacebookClient;
+import com.restfb.types.User;
 import com.ssv.museum.core.Visitor;
 import com.ssv.museum.persistence.MuseumDAO;
 import com.ssv.museum.persistence.VisitorDAO;
@@ -67,31 +70,14 @@ public abstract class AuthedREST {
         return hash.toString();
     }
     public String getFacebookUserID(String at) {
-        String graph = null;
-        try {
-            String g = "https://graph.facebook.com/me?" + at;
-            URL u = new URL(g);
-            URLConnection c = u.openConnection();
-            BufferedReader in = new BufferedReader(new InputStreamReader(c.getInputStream()));
-            String inputLine;
-            StringBuffer b = new StringBuffer();
-            while ((inputLine = in.readLine()) != null)
-                b.append(inputLine + "\n");            
-            in.close();
-            graph = b.toString();
-        } catch (Exception e) {
-                System.out.print(e);
-        }
-        String facebookId = null;
-        String email;
-        try {
-            JSONObject json = new JSONObject(graph);
-            facebookId = json.getString("id");
-            email = json.getString("email");
-        } catch (JSONException e) {
-            // an error occurred, handle this
-        }
-        return facebookId;
+        FacebookClient facebookClient = new DefaultFacebookClient(at, "4422e837b4f7033bf3a2303807df6e2c");
+        User user = facebookClient.fetchObject("me", User.class);
+        return user.getId();
+    }
+    public String getFacebookUsername(String at) {
+        FacebookClient facebookClient = new DefaultFacebookClient(at, "4422e837b4f7033bf3a2303807df6e2c");
+        User user = facebookClient.fetchObject("me", User.class);
+        return user.getName();
     }
 
     private MuseumDAO lookupMuseumDAOBean() {

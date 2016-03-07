@@ -75,9 +75,9 @@ public class VisitorREST extends AuthedREST {
     @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     public Response signup(JsonObject obj,
                          @Context Request request) {
-        String name = obj.getString("name");
         String at = obj.getString("access_token");
         String facebookId = getFacebookUserID(at);
+        String name = getFacebookUsername(at);
         if (facebookId!=null) {
             Visitor newVisitor = new Visitor(name, facebookId);
             visitorDAO.create(newVisitor);

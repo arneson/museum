@@ -30,7 +30,7 @@ public class VisitorDAO extends AbstractDAO<Visitor, Long> {
     }
 
     public Visitor findByFbId(String facebookId) {
-        return em.createQuery("SELECT * FROM visitor WHERE fbid = "+facebookId, Visitor.class)
+        return em.createQuery("SELECT * FROM VISITOR WHERE FBID = "+facebookId, Visitor.class)
                 .getSingleResult();
     }
     

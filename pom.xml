@@ -44,6 +44,11 @@
             <version>7.0</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>com.restfb</groupId>
+            <artifactId>restfb</artifactId>
+            <version>1.20.0</version>
+        </dependency>
     </dependencies>
 
     <build>
