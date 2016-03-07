@@ -39,6 +39,9 @@ public class TestMuseumPersistence {
     
     @Inject
     TestMuseumWrapper tmw;
+    
+    @Inject
+    AnswerOptionDAO answerOptionDAO;
    
     
     @Deployment
@@ -53,7 +56,7 @@ public class TestMuseumPersistence {
                 .addAsResource("persistence.xml", "META-INF/persistence.xml")
                 .addAsResource("web-fragment.xml", "META-INF/web-fragment.xml")
                 // Must have for CDI to work
-                .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
+                .addAsWebInfResource(EmptyAsset.INSTANCE, "META-INF/beans.xml");
  
     }
     
@@ -65,9 +68,9 @@ public class TestMuseumPersistence {
     @Test
     public void testAnswerOption() throws Exception{
         AnswerOption a1 = new AnswerOption("testString");
-        tmw.getAnswerOptionDAO().create(a1);
+        answerOptionDAO.create(a1);
         
-        List<AnswerOption> a_Options = tmw.getAnswerOptionDAO().findAll();
+        List<AnswerOption> a_Options = answerOptionDAO.findAll();
         assertTrue(a_Options.size() > 0);
         assertTrue(a_Options.get(0).getText().equals(a1.getText()));
     }
