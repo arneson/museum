@@ -1,0 +1,23 @@
+<ion-view class="login">
+    <div class="top">
+        <label class="item item-input item-select">
+            <div class="input-label">
+                &nbsp;
+            </div>
+        </label>
+        <div class="logo-wrapper"><img src="img/logo.png"></div>
+	</div>
+    <div class="interaction scroller">
+        <a href="#">
+            <div id="button-login" ng-click="loginClick()" class="Button-rounded Button-small Button-facebook">
+                <div class="button-content">
+                    <div class="Button-img"><img src="img/icon-f.png"></div>
+                    <div class="Button-text">Sign in</div>
+                </div>
+            </div>
+            <div id="login-error" style="display:none;color:red;">
+                <p>Something went wrong, do you have an internet connection?</p>
+            </div>
+        </a>
+    </div>
+</ion-view>

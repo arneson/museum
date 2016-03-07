@@ -147,6 +147,7 @@ public class QuestionREST {
     
     //answer
     @POST
+    @Path("{id: \\d+}/answer")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     public Response answer(JsonObject obj, 
