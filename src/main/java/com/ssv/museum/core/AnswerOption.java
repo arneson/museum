@@ -26,6 +26,6 @@ public class AnswerOption extends AbstractEntity {
 
     @Override
     public String toString() {
-        return "Option{" + "text=" + text+'}';
+        return "Option{" + "text=" + text +'}';
     }
 }

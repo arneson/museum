@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="museumApp">
     <head>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
+        
+        <link rel="stylesheet" type="text/css" href="styles/styles.css">
+
+        
         <title>Start Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Museum app!</h1>
+        <div ng-view></div>
+        
+        <ul ng-controller="MuseumAppCtrl">
+            <li ng-repeat="name in names">
+                <span>{{name.name}}</span>
+            </li>
+        </ul>
+        
+        <!-- External scripts -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+   
+        <!-- Application scripts -->
+        <script src="app/app.js"></script>
+        
     </body>
 </html>
