@@ -9,11 +9,17 @@ import com.ssv.museum.persistence.QuizDAO;
 import com.ssv.museum.persistence.TeamDAO;
 import com.ssv.museum.persistence.VisitorDAO;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.enterprise.inject.Default;
+import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.jboss.arquillian.container.test.api.Deployment;
-//import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -32,25 +38,8 @@ import org.junit.runner.RunWith;
 public class TestMuseumPersistence {
     
     @Inject
-    AnswerOptionDAO answerOptionDAO;
-    
-    @Inject
-    MediaDAO mediaDAO;
-    
-    @Inject
-    MuseumDAO museumDAO;
-    
-    @Inject
-    QuestionDAO questionDAO;
-    
-    @Inject
-    QuizDAO quizDAO;
-    
-    @Inject
-    TeamDAO teamDAO;
-    
-    @Inject
-    VisitorDAO visitorDAO;
+    TestMuseumWrapper tmw;
+   
     
     @Deployment
     public static Archive<?> createDeployment() {
@@ -58,9 +47,11 @@ public class TestMuseumPersistence {
                 // Add all classes
                 .addPackage("com.ssv.museum.core")
                 .addPackage("com.ssv.museum.persistance")
+                .addPackage("service")
                 // This will add test-persitence.xml as persistence.xml (renamed)
                 // in folder META-INF, see Files > jpa_managing > target > arquillian
-                .addAsResource("test-persistence.xml", "META-INF/persistence.xml")
+                .addAsResource("persistence.xml", "META-INF/persistence.xml")
+                .addAsResource("web-fragment.xml", "META-INF/web-fragment.xml")
                 // Must have for CDI to work
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
  
@@ -74,11 +65,19 @@ public class TestMuseumPersistence {
     @Test
     public void testAnswerOption() throws Exception{
         AnswerOption a1 = new AnswerOption("testString");
-        answerOptionDAO.create(a1);
+        tmw.getAnswerOptionDAO().create(a1);
         
-        List<AnswerOption> a_Options = answerOptionDAO.findAll();
+        List<AnswerOption> a_Options = tmw.getAnswerOptionDAO().findAll();
         assertTrue(a_Options.size() > 0);
         assertTrue(a_Options.get(0).getText().equals(a1.getText()));
     }
+    
+        // Need a standalone em to remove testdata between tests
+    // No em accessible from interfaces
+    @PersistenceContext(unitName = "com.mycompany_Museum_war_1.0-SNAPSHOTPU")
+    @Produces
+    @Default
+    EntityManager em;
+
     
 }

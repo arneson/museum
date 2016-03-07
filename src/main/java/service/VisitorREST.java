@@ -97,7 +97,12 @@ public class VisitorREST extends AuthedREST {
         String facebookId = getFacebookUserID(at);
         if (facebookId!=null) {
             Visitor v = visitorDAO.findByFbId(facebookId);
-            return Response.ok(v).build(); // 200
+            //if no account exists, create one by internal redirect to signup
+            if(v==null){
+                return signup(obj,request);
+            }else{
+                return Response.ok(v).build(); // 200
+            }
         } else {
             return Response.noContent().build();  // 204
         }
