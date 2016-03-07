@@ -127,6 +127,7 @@ public class TeamREST {
     
     //addMemeber
     @POST
+    @Path("/members")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     public Response addMember(JsonObject obj, 
@@ -134,7 +135,6 @@ public class TeamREST {
                          @Context Request request){
         Team team = teamDAO.find(id);
         if (team != null) {
-            
             long visitor_id = obj.getJsonNumber("visitor_id").longValue();
             Visitor visitor = vistorDAO.find(visitor_id);
             String role = obj.getString("memberRole");

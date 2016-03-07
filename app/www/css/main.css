@@ -1,0 +1,79 @@
+body {
+  font-family: "Open Sans", "Helvetica", sans-serif;
+  color: #EEE;
+  font-weight: 300; }
+
+body *:not(input) {
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none; }
+
+.Button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 17px;
+  outline: none; }
+
+.Button-rounded {
+  background-color: #11151F;
+  border: none;
+  border-radius: 25px;
+  height: 50px;
+  margin: 0 auto;
+  margin-top: 10px;
+  padding: 0;
+  text-align: center; }
+
+.Button-small {
+  width: 150px; }
+
+.Button-normal {
+  width: 175px; }
+
+.Button-large {
+  width: 200px; }
+
+.Button-h1 {
+  background-color: #11151F;
+  border: none;
+  border-radius: 25px;
+  height: 50px;
+  font-family: "Pacifico", "Helvetica", sans-serif;
+  font-size: 21px;
+  font-weight: 300;
+  margin: 0 auto;
+  padding-top: 5.5px;
+  text-align: center; }
+
+.Button-img {
+  float: left;
+  height: 26px;
+  width: 60px;
+  margin-top: 12px; }
+
+.Button-img img {
+  height: 26px; }
+
+.Button-text {
+  float: left;
+  font-size: 17px;
+  font-weight: 300;
+  margin-top: 11.5px;
+  color: #eee; }
+
+.Button-text-center {
+  font-weight: 300;
+  padding-top: 11.5px; }
+
+.Button-facebook {
+  background-color: #3B5998; }
+
+.logo-wrapper {
+  width: 100%;
+  text-align: center; }
+  .logo-wrapper img {
+    display: inline-block; }

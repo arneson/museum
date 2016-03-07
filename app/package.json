@@ -1,0 +1,10 @@
+{ 
+    "dependencies": {
+        "gulp":"latest",
+        "gulp-sass":"latest",
+        "gulp-run":"latest",
+        "ip":"latest",
+        "gulp-bower":"latest",
+        "gulp-filter":"latest"
+    }
+}

@@ -32,7 +32,7 @@ import javax.ws.rs.core.Response;
  *
  * @author simonarneson
  */
-@Path("visitor")
+@Path("museum")
 public class MuseumREST extends AuthedREST {
     
     //DAO

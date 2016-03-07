@@ -8,6 +8,10 @@ package service;
 import com.ssv.museum.core.Visitor;
 import com.ssv.museum.persistence.MuseumDAO;
 import com.ssv.museum.persistence.VisitorDAO;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
@@ -15,6 +19,8 @@ import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import org.codehaus.jettison.json.JSONException;
+import org.codehaus.jettison.json.JSONObject;
 
 /**
  *
@@ -61,13 +67,37 @@ public abstract class AuthedREST {
         return hash.toString();
     }
     public String getFacebookUserID(String at) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        String graph = null;
+        try {
+            String g = "https://graph.facebook.com/me?" + at;
+            URL u = new URL(g);
+            URLConnection c = u.openConnection();
+            BufferedReader in = new BufferedReader(new InputStreamReader(c.getInputStream()));
+            String inputLine;
+            StringBuffer b = new StringBuffer();
+            while ((inputLine = in.readLine()) != null)
+                b.append(inputLine + "\n");            
+            in.close();
+            graph = b.toString();
+        } catch (Exception e) {
+                System.out.print(e);
+        }
+        String facebookId = null;
+        String email;
+        try {
+            JSONObject json = new JSONObject(graph);
+            facebookId = json.getString("id");
+            email = json.getString("email");
+        } catch (JSONException e) {
+            // an error occurred, handle this
+        }
+        return facebookId;
     }
 
     private MuseumDAO lookupMuseumDAOBean() {
         try {
             Context c = new InitialContext();
-            return (MuseumDAO) c.lookup("java:global/com.mycompany_Museum_war_1.0-SNAPSHOT/MuseumDAO!com.ssv.museum.persistence.MuseumDAO");
+            return (MuseumDAO) c.lookup("java:global/Museum/MuseumDAO!com.ssv.museum.persistence.MuseumDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
@@ -77,7 +107,7 @@ public abstract class AuthedREST {
     private VisitorDAO lookupVisitorDAOBean() {
         try {
             Context c = new InitialContext();
-            return (VisitorDAO) c.lookup("java:global/com.mycompany_Museum_war_1.0-SNAPSHOT/VisitorDAO!com.ssv.museum.persistence.VisitorDAO");
+            return (VisitorDAO) c.lookup("java:global/Museum/VisitorDAO!com.ssv.museum.persistence.VisitorDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

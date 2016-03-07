@@ -97,3 +97,10 @@ log/
 target/
 pom.xml
 nb-configuration.xml
+
+
+app/node_modules/
+.vscode/
+.DS_Store
+app/platforms/
+app/bower_components/
