@@ -1,0 +1,3 @@
+museumApp.controller('addQuestionController', function(){
+    
+});

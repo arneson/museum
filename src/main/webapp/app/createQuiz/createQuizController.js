@@ -4,5 +4,4 @@
  * and open the template in the editor.
  */
 
-var museumApp = angular.module('museumApp', ['ngRoute']);
 

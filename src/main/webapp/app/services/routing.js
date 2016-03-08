@@ -9,11 +9,19 @@ museumApp.config(['$routeProvider',
         $routeProvider.
                 when('/login',{
                     templateUrl: 'app/login/index.html',
-                    controller: 'MuseumAppCtrl'
+                    controller: 'loginController'
                 }).
                 when('/admin',{
                     templateUrl: 'app/admin/index.html',
                     controller: 'adminController'
+                }).
+                when('/createQuiz',{
+                    templateUrl: 'app/creteQuiz/index.html',
+                    controller: 'createQuizController'
+                }).
+                when('/addQuestion',{
+                    templateUrl: 'app/addQuestion/index.html',
+                    controller: 'addQuestionController'
                 }).
                 otherwise({
                     redirectTo: '/'
