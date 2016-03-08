@@ -4,9 +4,8 @@
             <label for="title">Quiz Title</label>
             <input ng-model="quiz.title" class="form-control" type="text" ng-required="true" id="title">
         </div>
-        <div class="form-group well well-sm">
-            <label for="question1">Question</label>
-            <textarea ng-model="quiz.questions.question1" class="form-control" id="question1"></textarea>
+        <div class="form-group well well-sm" ng-controller="questionController">
+            <question></question>
         </div>
     </form>
     <button type="submit" class="btn btn-success">Save Quiz</button>
