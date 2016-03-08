@@ -1,16 +1,31 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<div ng-controller="addQuestionController">
+    <div class="form-group">
+        <label for="question">Question:</label>
+        <input type="text" class="form-control" id="question" ng-model="question.question">          
+    </div>
+    <br>
+    <br>
+    <div class="form-group">
+        <label for="answer1">Answer 1:</label>
+        <input type="text" class="form-control" id="answer1" ng-model="question.answer1">          
+    </div>
+    <div class="form-group">
+        <label for="answer2">Answer 2:</label>
+        <input type="text" class="form-control" id="answer2" ng-model="question.answer2">          
+    </div>
+    <div class="form-group">
+        <label for="answer3">Answer 3:</label>
+        <input type="text" class="form-control" id="answer3" ng-model="question.answer3">          
+    </div>
+    <div class="form-group">
+        <label for="answer4">Answer 4:</label>
+        <input type="text" class="form-control" id="answer4" ng-model="question.answer4">          
+    </div>
+    <br>
+    <div class="form-group">
+        <label for="points">Points :</label>
+        <input type="number" class="form-control" id="points" ng-model="question.points">          
+    </div>
+    <br>
+    <span>question = {{question}}</span>
+</div>
