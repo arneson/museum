@@ -2,7 +2,7 @@ angular.module('museum.controllers')
 
 .controller('loginController', function($scope, $rootScope,$state,museumAPIService) {
     ionic.Platform.ready(function(){
-        if($scope.currentUser){
+        if($rootScope.currentUser!==undefined){
             $state.go('app.main');
         }
     });
@@ -10,7 +10,7 @@ angular.module('museum.controllers')
     $scope.loginClick = function(){
         if(window.device){
             facebookConnectPlugin.login(["public_profile,user_friends,email"],
-                app.fbLoginSuccess,
+                loginSuccess,
                 function (error) { alert("" + error) }
             );
         }else{
@@ -22,6 +22,11 @@ angular.module('museum.controllers')
         }
     };
     function FBlogin(at){
-        museumAPIService.login(at,function(res){console.log(at)})
+        museumAPIService.login(at,loginSuccess);
+    };
+    function loginSuccess(user){
+        $rootScope.currentUser = user;
+        $state.go('app.main');
+        console.log(user);
     };
 });

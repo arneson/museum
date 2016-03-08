@@ -69,6 +69,8 @@ body *:not(input) {
 
 .Button-facebook {
   background-color: #3B5998; }
+Button.grey {
+  background-color: darkgrey; }
   
 .logo-wrapper{
     width: 100%;
@@ -76,4 +78,42 @@ body *:not(input) {
     img{
         display: inline-block;
     }
+}
+.icon{
+    color:#eee;
+    font-size:23px;
+}
+.question-wrapper{
+    height:35vh;
+    width: 100%;
+    text-align: center;
+    color: darkgrey;
+    img{
+        display: inline-block;
+    }
+    overflow: hidden;
+    display: table;
+    .inner-container{
+        display: table-cell;
+        vertical-align: middle;
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+        .element{
+            color: #999999;
+            text-decoration: none;
+            padding: 0px 10px;
+            display: block;
+        }
+        .question-text{
+            font-size: 20px;
+            line-height: 25px;
+        }
+    }
+}
+.option-text{
+    font-size:15px;
+}
+.Button-option{
+    width:90vw;
 }

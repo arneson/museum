@@ -13,12 +13,17 @@ import com.ssv.museum.core.Visitor;
 import com.ssv.museum.persistence.AnswerOptionDAO;
 import com.ssv.museum.persistence.QuestionDAO;
 import com.ssv.museum.persistence.VisitorDAO;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.naming.InitialContext;
@@ -98,14 +103,14 @@ public class QuestionREST {
                          @Context Request request) {
         
             String question = obj.getString("question");
-            int points = obj.getInt("points");
+            int points = Integer.parseInt(obj.getString("points"));
             JsonArray opts = obj.getJsonArray("options");
             AnswerOption correctOption = new AnswerOption(obj.getJsonObject("correct").getString("text"));
             List<AnswerOption> options = new ArrayList<>();
             for(int o = 0;o<opts.size();o++){
                 options.add(new AnswerOption(opts.getJsonObject(o).getString("text")));
             }
-            
+            options.add(correctOption);
             Question newQuestion = new Question(question, points, options, correctOption);
             questionDAO.create(newQuestion);
         if (newQuestion != null) {
@@ -169,6 +174,32 @@ public class QuestionREST {
             }
             
             return Response.ok(question).build(); // 200
+        } else {
+            return Response.noContent().build();  // 204
+        }
+    }
+    //QR
+    @GET
+    @Path("{id: \\d+}/qr")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response qr(@PathParam("id") Long id,
+            @Context Request request) {
+        Question question = questionDAO.find(id);
+        if (question != null) {
+            BufferedImage bi = question.getQR();
+            if(bi!=null){
+                try {
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    ImageIO.write(bi, "png", baos);
+                    byte[] imageData = baos.toByteArray();
+                    return Response.ok(imageData).build(); // 200
+                } catch (IOException ex) {
+                    Logger.getLogger(QuestionREST.class.getName()).log(Level.SEVERE, null, ex);
+                    return Response.noContent().build();
+                }
+            }else{
+                return Response.noContent().build();
+            }
         } else {
             return Response.noContent().build();  // 204
         }
