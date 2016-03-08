@@ -10,7 +10,7 @@ museumApp.config(['$routeProvider',
     function($routeProvider){
         $routeProvider.
                 when('/login',{
-                    templateUrl: 'partials/login.html',
+                    templateUrl: 'app/partials/login.html',
                     controller: 'MuseumAppCtrl'
                 }).
                 otherwise({
