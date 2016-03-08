@@ -162,8 +162,8 @@ public class QuestionREST {
         
         if (question != null) {
             
-            long answer_id  = obj.getJsonNumber("answer_id").longValue();
-            long visitor_id = obj.getJsonNumber("visitor_id").longValue();
+            long answer_id  = Long.parseLong(obj.getString("answer_id"));
+            long visitor_id = Long.parseLong(obj.getString("visitor_id"));
             Visitor visitor = visitorDAO.find(visitor_id);
             AnswerOption answerOption = answerOptionDAO.find(answer_id);
             boolean result = question.checkAnswer(answerOption);
@@ -172,7 +172,7 @@ public class QuestionREST {
             if(result){
                 visitor.addPoints(question.getPoints());
             }
-            
+            visitorDAO.update(visitor); 
             return Response.ok(question).build(); // 200
         } else {
             return Response.noContent().build();  // 204

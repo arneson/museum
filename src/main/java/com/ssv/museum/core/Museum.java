@@ -67,4 +67,8 @@ public class Museum extends AbstractEntity {
     public String toString() {
         return "Museum{" + "Museum=" + name+'}';
     }
+
+    public void addQuiz(Quiz newQuiz) {
+        this.quiz.add(newQuiz);
+    }
 }

@@ -8,6 +8,7 @@ package service;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.types.User;
+import com.ssv.museum.core.Museum;
 import com.ssv.museum.core.Visitor;
 import com.ssv.museum.persistence.MuseumDAO;
 import com.ssv.museum.persistence.VisitorDAO;
@@ -45,7 +46,8 @@ public abstract class AuthedREST {
         return false;
     }
     public boolean authMuseum(String password, String username){
-        return generateHash(saltPassword(password)).equals(museumDAO.findByUsername("username").getPassword());
+        Museum m = museumDAO.findByUsername(username);
+        return m!=null && generateHash(saltPassword(password)).equals(m.getPassword());
     }
     public static String saltPassword(String input) {
         return SALT + input;

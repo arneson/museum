@@ -11,8 +11,17 @@
         <a href="#" ng-repeat="option in question.options">
             <div ng-click="answerClick(option)" class="Button-rounded Button-option Button-grey">
                 <div class="button-content">
-                    <div class="Button-img"> <i class="icon ion-ios-circle-outline"></i></div>
+                    <div class="Button-img"> <i class="icon {{option.clicked?(option.correct?'ion-ios-checkmark-outline':'ion-close-round'):'ion-ios-circle-outline'}}"></i></div>
                     <div class="Button-text option-text">{{option.text}}</div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div ng-if="answerSet" class="bottom">
+        <a href="#">
+            <div id="Button-back" ng-click="backClick()" class="Button-rounded Button-option Button-grey">
+                <div class="button-content">
+                    <div class="Button-text back-text">Skanna ny fråga</div>
                 </div>
             </div>
         </a>

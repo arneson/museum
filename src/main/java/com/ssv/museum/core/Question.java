@@ -67,7 +67,7 @@ public class Question extends AbstractEntity {
     }
     
     public boolean checkAnswer(AnswerOption answer){
-        return correctOption == answer;
+        return correctOption.equals(answer);
     }
 
     @Override

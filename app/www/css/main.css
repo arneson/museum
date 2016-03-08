@@ -114,3 +114,13 @@ Button.grey {
 
 .Button-option {
   width: 90vw; }
+  .Button-option .ion-close-round {
+    color: red; }
+  .Button-option .ion-ios-checkmark-outline {
+    color: green; }
+
+#Button-back {
+  margin-top: 20px;
+  background-color: grey; }
+  #Button-back .back-text {
+    width: 100%; }
