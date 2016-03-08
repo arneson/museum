@@ -137,6 +137,7 @@ public class QuizREST {
         for(int o = 0;o<opts.size();o++){
             options.add(new AnswerOption(opts.getJsonObject(o).getString("text")));
         }
+        options.add(correctOption);
         Quiz quiz = quizDAO.find(id);
         quiz.addQuestion(new Question(text,points, options, correctOption));
         quizDAO.update(quiz);

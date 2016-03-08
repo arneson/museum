@@ -16,7 +16,7 @@ angular.module('museum.controllers')
                 option.correct = true;
             }
             option.clicked = true;
-            museumAPIService.answerQuestion(option.id,answerCallback);
+            museumAPIService.answerQuestion($scope.question.id,option.id,answerCallback);
         }
     }
     $scope.backClick = function(option){
