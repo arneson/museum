@@ -16,7 +16,7 @@ museumApp.config(['$routeProvider',
                     controller: 'adminController'
                 }).
                 when('/createQuiz',{
-                    templateUrl: 'app/creteQuiz/index.html',
+                    templateUrl: 'app/createQuiz/index.html',
                     controller: 'createQuizController'
                 }).
                 when('/addQuestion',{
