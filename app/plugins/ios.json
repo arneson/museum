@@ -7,23 +7,34 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.kicksort.basetemplate"
-        },
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.kicksort.basetemplate"
+            "PACKAGE_NAME": "com.cymonit.museum"
         },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.kicksort.basetemplate"
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.cymonit.museum"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.cymonit.museum"
         },
         "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.kicksort.basetemplate"
+            "PACKAGE_NAME": "com.cymonit.museum"
         },
         "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.kicksort.basetemplate"
+            "PACKAGE_NAME": "com.cymonit.museum"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.cymonit.museum"
         },
         "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.kicksort.basetemplate"
+            "PACKAGE_NAME": "com.cymonit.museum"
+        },
+        "phonegap-plugin-barcodescanner": {
+            "PACKAGE_NAME": "com.cymonit.museum"
+        },
+        "com.phonegap.plugins.facebookconnect": {
+            "APP_ID": "190225798016928",
+            "APP_NAME": "Museumsjakten",
+            "PACKAGE_NAME": "com.cymonit.museum"
         }
     },
     "dependent_plugins": {}

@@ -54,5 +54,24 @@
         },
         "is_top_level": true,
         "variables": {}
+    },
+    "phonegap-plugin-barcodescanner": {
+        "source": {
+            "type": "registry",
+            "id": "phonegap-plugin-barcodescanner"
+        },
+        "is_top_level": true,
+        "variables": {}
+    },
+    "com.phonegap.plugins.facebookconnect": {
+        "source": {
+            "type": "local",
+            "path": "/Users/simonarneson/DEVELOPMENT/facebookPhonegap/Facebook"
+        },
+        "is_top_level": true,
+        "variables": {
+            "APP_ID": "190225798016928",
+            "APP_NAME": "Museumsjakten"
+        }
     }
 }

@@ -1,0 +1,20 @@
+<ion-view class="main">
+    <div class="top">
+        <div class="question-wrapper">
+            <div class="inner-container">
+                <div class="element question-text"><p>{{question.question}}</p></div>
+            </div>
+            <img ng-if="question.media.lengh>0" src=""/>
+        </div>
+	</div>
+    <div class="interaction scroller">
+        <a href="#" ng-repeat="option in question.options">
+            <div ng-click="answerClick(option)" class="Button-rounded Button-option Button-grey">
+                <div class="button-content">
+                    <div class="Button-img"> <i class="icon ion-ios-circle-outline"></i></div>
+                    <div class="Button-text option-text">{{option.text}}</div>
+                </div>
+            </div>
+        </a>
+    </div>
+</ion-view>
