@@ -13,7 +13,7 @@ museumApp.config(['$routeProvider',
                 }).
                 when('/admin',{
                     templateUrl: 'app/admin/index.html',
-                    controller: 'app/admin/adminController.js'
+                    controller: 'adminController'
                 }).
                 otherwise({
                     redirectTo: '/'
