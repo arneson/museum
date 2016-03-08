@@ -104,3 +104,4 @@ app/node_modules/
 .DS_Store
 app/platforms/
 app/bower_components/
+/nbproject/
