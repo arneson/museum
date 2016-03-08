@@ -1,0 +1,3 @@
+museumApp.controller('loginController', function(){
+    
+});

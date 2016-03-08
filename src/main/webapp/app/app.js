@@ -6,24 +6,3 @@
 
 var museumApp = angular.module('museumApp', ['ngRoute']);
 
-museumApp.config(['$routeProvider', 
-    function($routeProvider){
-        $routeProvider.
-                when('/login',{
-                    templateUrl: 'partials/login.html',
-                    controller: 'MuseumAppCtrl'
-                }).
-                otherwise({
-                    redirectTo: '/'
-                });
-    }]);
-
-museumApp.controller('MuseumAppCtrl', function($scope) {
-   $scope.names = [
-       { 'name' : 'Sebastian'},
-       { 'name' : 'Simon'},
-       { 'name' : 'Victor'}
-       
-       
-   ] 
-});

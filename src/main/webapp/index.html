@@ -13,17 +13,21 @@
         <h1>Museum app!</h1>
         <div ng-view></div>
         
-        <ul ng-controller="MuseumAppCtrl">
-            <li ng-repeat="name in names">
-                <span>{{name.name}}</span>
-            </li>
-        </ul>
+        
         
         <!-- External scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+        
    
         <!-- Application scripts -->
         <script src="app/app.js"></script>
+        <script src="app/services/routing.js"></script>
         
+        <!-- Application Controllers -->
+        <script src="app/admin/adminController.js"></script> 
+        <script src="app/createQuiz/createQuizController.js"></script> 
+        <script src="app/addQuestion/addQuestionController.js"></script>
+        <script src="app/login/loginController.js"></script>
     </body>
 </html>
