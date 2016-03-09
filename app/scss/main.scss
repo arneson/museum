@@ -123,10 +123,16 @@ Button.grey {
         color:green;
     }
 }
+.Button-wide{
+    width:90vw;
+}
 #Button-back{
     margin-top: 20px;
     background-color: grey;
     .back-text{
         width: 100%;
     }
+}
+.Button-main{
+    margin-bottom: 30px;
 }

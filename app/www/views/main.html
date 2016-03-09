@@ -1,17 +1,32 @@
 <ion-view class="main">
     <div class="top">
-        <div class="logo-wrapper"><img src="img/logo.png"></div>
+        <div class="logo-wrapper"><img width="200px" src="img/logo.png"></div>
 	</div>
     <div class="interaction scroller">
         <a href="#">
-            <div id="button-login" ng-click="scanClick()" class="Button-rounded Button-small Button-facebook">
+            <div id="button-scan" ng-click="scanClick()" class="Button-rounded Button-main Button-wide Button-grey">
                 <div class="button-content">
                     <div class="Button-img"> <i class="icon ion-qr-scanner"></i></div>
                     <div class="Button-text">Skanna</div>
                 </div>
             </div>
-            <div class="profile">
-                <p>Mina poäng: {{currentUser.totalPoints}}</p>
+            <div id="button-join" ng-click="joinClick()" class="Button-rounded Button-main Button-wide Button-grey">
+                <div class="button-content">
+                    <div class="Button-img"> <i class="icon ion-ios-people"></i></div>
+                    <div class="Button-text">Anslut till grupp</div>
+                </div>
+            </div>
+            <div id="button-museum" ng-click="museumClick()" class="Button-rounded Button-main Button-wide Button-grey">
+                <div class="button-content">
+                    <div class="Button-img"> <i class="icon ion-android-map"></i></div>
+                    <div class="Button-text">Hitta museum</div>
+                </div>
+            </div>
+            <div id="button-points" ng-click="pointsClick()" class="Button-rounded Button-main Button-wide Button-grey">
+                <div class="button-content">
+                    <div class="Button-img"> <i class="icon ion-ribbon-a"></i></div>
+                    <div class="Button-text">Mina poäng: {{currentUser.totalPoints}}</div>
+                </div>
             </div>
             <div id="login-error" style="display:none;color:red;">
                 <p>Something went wrong, do you have an internet connection?</p>
