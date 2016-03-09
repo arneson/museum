@@ -14,6 +14,7 @@ import com.ssv.museum.core.Visitor;
 import com.ssv.museum.persistence.MuseumDAO;
 import com.ssv.museum.persistence.QuizDAO;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -32,6 +33,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
+import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
@@ -55,6 +57,18 @@ public class MuseumREST extends AuthedREST {
         Museum m = museumDAO.find(id);
         if ( m != null) {
             return Response.ok(m).build(); // 200
+        } else {
+            return Response.noContent().build();  // 204
+        }
+    }
+    //findAll
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response findAll(@Context Request request) {
+        List<Museum> museums = museumDAO.findAll();
+        GenericEntity<Collection<Museum>> ge = new GenericEntity<Collection<Museum>>(museums){};
+        if (museums.size()>-1) {
+            return Response.ok(ge).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }

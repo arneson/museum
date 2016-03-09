@@ -46,14 +46,15 @@ angular.module('museum', ['ionic','museum.controllers', 'museum.services'])
             }
         }
     })
-    .state('app.question', {
+    .state('question', {
         url: "/question?questionId",
-        views: {
-            'menuContent': {
-                templateUrl: 'views/question.html',
-                controller: 'questionController'
-            }
-        }
+        templateUrl: 'views/question.html',
+        controller: 'questionController'
+    })
+    .state('app.museums', {
+        url: "/museums",
+        templateUrl: 'views/museums.html',
+        controller: 'museumsController'
     })
     .state('login', {
         url: "/login",

@@ -77,6 +77,7 @@ Button.grey {
 
 .logo-wrapper {
   width: 100%;
+  margin-top: 5vw;
   text-align: center; }
   .logo-wrapper img {
     display: inline-block; }
@@ -129,4 +130,4 @@ Button.grey {
     width: 100%; }
 
 .Button-main {
-  margin-bottom: 30px; }
+  margin-bottom: 20px; }
