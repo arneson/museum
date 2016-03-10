@@ -98,17 +98,21 @@ public class MuseumREST extends AuthedREST {
     @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     public Response signup(JsonObject obj,
                          @Context Request request) {
-        String email = obj.getString("email");
-        String username = obj.getString("username");
-        String password = obj.getString("password");
-        String name = obj.getString("name");
-        if (password!=null && password.length()>3 && username.length()>2) {
-            password = generateHash(saltPassword(password));
-            Museum newMuseum = new Museum(username, password,email,name);
-            museumDAO.create(newMuseum);
-            return Response.ok(newMuseum).build(); // 200
-        } else {
-            return Response.status(400).build();  // 400
+        try{
+            String email = obj.getString("email");
+            String username = obj.getString("username");
+            String password = obj.getString("password");
+            String name = obj.getString("name");
+            if (password!=null && password.length()>3 && username.length()>2) {
+                password = generateHash(saltPassword(password));
+                Museum newMuseum = new Museum(username, password,email,name);
+                museumDAO.create(newMuseum);
+                return Response.ok(newMuseum).build(); // 200
+            } else {
+                return Response.status(400).build();  // 400
+            }
+        }catch(NullPointerException e){
+            return Response.status(400).build();
         }
     }
     //login
@@ -118,11 +122,15 @@ public class MuseumREST extends AuthedREST {
     @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     public Response login(JsonObject obj,
                          @Context Request request) {
-        String password = obj.getString("password");
-        String username = obj.getString("username");
-        if (authMuseum(password,username)) {
-            return Response.ok(museumDAO.findByUsername(username)).build(); // 200
-        } else {
+        try{
+            String password = obj.getString("password");
+            String username = obj.getString("username");
+            if (authMuseum(password,username)) {
+                return Response.ok(museumDAO.findByUsername(username)).build(); // 200
+            } else {
+                return Response.status(400).build();  // 400
+            }
+        }catch(NullPointerException e){
             return Response.status(400).build();  // 400
         }
     }
