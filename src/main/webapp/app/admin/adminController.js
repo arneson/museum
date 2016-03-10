@@ -5,13 +5,9 @@ museumApp.controller('adminController',['$scope','$rootScope','$location', funct
         $location.path('/login');
     }
     
-    $scope.quizzes = [{
-        title: 'Animal Quiz',
-        id: '1'
-    },
-    {
-        title: 'Nature Quiz',
-        id: '2'
-    }];
+    $scope.quizzes = $rootScope.currentUser.quiz;
+    
+    
+    
 }]);
 
