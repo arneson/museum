@@ -22,7 +22,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             });
         },
         
-        signup: function(name, username, password, email){
+        signUp: function(name, username, password, email){
             var data = {};
             data.name = name;
             data.username = username;
