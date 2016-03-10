@@ -41,6 +41,7 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
+import com.google.gson.Gson;
 
 /**
  *
@@ -62,7 +63,8 @@ public class QuestionREST {
             @Context Request request) {
         Question question = questionDAO.find(id);
         if (question != null) {
-            return Response.ok(question).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(question)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -74,7 +76,8 @@ public class QuestionREST {
         List<Question> questions = questionDAO.findAll();
         GenericEntity<Collection<Question>> ge = new GenericEntity<Collection<Question>>(questions){};
         if (questions.size()>-1) {
-            return Response.ok(ge).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(ge)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -89,7 +92,8 @@ public class QuestionREST {
         Question question = questionDAO.find(id);
         if (question != null) {
             questionDAO.delete(id);
-            return Response.ok(question).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(question)).build();
         } else {
             return Response.noContent().build();  // 204
         }
@@ -107,14 +111,18 @@ public class QuestionREST {
             JsonArray opts = obj.getJsonArray("options");
             AnswerOption correctOption = new AnswerOption(obj.getJsonObject("correct").getString("text"));
             List<AnswerOption> options = new ArrayList<>();
+            Question newQuestion = new Question(question, points, options, correctOption);
+            correctOption.setQuestion(newQuestion);
             for(int o = 0;o<opts.size();o++){
-                options.add(new AnswerOption(opts.getJsonObject(o).getString("text")));
+                AnswerOption no = new AnswerOption(opts.getJsonObject(o).getString("text"));
+                no.setQuestion(newQuestion);
+                newQuestion.getOptions().add(no);
             }
             options.add(correctOption);
-            Question newQuestion = new Question(question, points, options, correctOption);
             questionDAO.create(newQuestion);
         if (newQuestion != null) {
-            return Response.ok(newQuestion).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(newQuestion)).build();
         } else {
             return Response.noContent().build();  // 204
         }
@@ -134,9 +142,12 @@ public class QuestionREST {
             int points = obj.getInt("points");
             JsonArray opts = obj.getJsonArray("options");
             AnswerOption correctOption = new AnswerOption(obj.getJsonObject("correct").getString("text"));
+            correctOption.setQuestion(q);
             List<AnswerOption> options = new ArrayList<>();
             for(int o = 0;o<opts.size();o++){
-                options.add(new AnswerOption(opts.getJsonObject(o).getString("text")));
+                AnswerOption ao = new AnswerOption(opts.getJsonObject(o).getString("text"));
+                ao.setQuestion(q);
+                options.add(ao);
             }
             
             q.setQuestion(question);
@@ -144,7 +155,8 @@ public class QuestionREST {
             q.setOptions(options);
             q.setCorrectOption(correctOption);
             questionDAO.update(q);
-            return Response.ok(q).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(q)).build();
         } else {
             return Response.noContent().build();  // 204
         }
@@ -167,13 +179,15 @@ public class QuestionREST {
             Visitor visitor = visitorDAO.find(visitor_id);
             AnswerOption answerOption = answerOptionDAO.find(answer_id);
             boolean result = question.checkAnswer(answerOption);
-            
-            visitor.addAnswer(new Answer(answerOption, result, new Date(), new Position()));
+            Answer a = new Answer(answerOption, result, new Date(), new Position());
+            a.setVisitor(visitor);
+            visitor.addAnswer(a);
             if(result){
                 visitor.addPoints(question.getPoints());
             }
             visitorDAO.update(visitor); 
-            return Response.ok(question).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(visitor)).build();
         } else {
             return Response.noContent().build();  // 204
         }

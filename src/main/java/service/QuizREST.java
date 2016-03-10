@@ -5,6 +5,7 @@
  */
 package service;
 
+import com.google.gson.Gson;
 import com.ssv.museum.core.AnswerOption;
 import com.ssv.museum.core.Question;
 import com.ssv.museum.core.Quiz;
@@ -49,7 +50,8 @@ public class QuizREST {
             @Context Request request) {
         Quiz quiz = quizDAO.find(id);
         if (quiz != null) {
-            return Response.ok(quiz).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(quiz)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -61,7 +63,8 @@ public class QuizREST {
         List<Quiz> quizzes = quizDAO.findAll();
         GenericEntity<Collection<Quiz>> ge = new GenericEntity<Collection<Quiz>>(quizzes){};
         if (quizzes.size()>-1) {
-            return Response.ok(ge).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(ge)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -76,7 +79,8 @@ public class QuizREST {
         Quiz quiz = quizDAO.find(id);
         if (quiz != null) {
             quizDAO.delete(id);
-            return Response.ok(quiz).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(quiz)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -94,7 +98,8 @@ public class QuizREST {
         Quiz newQuiz = new Quiz(name, points, new Date(), description);
         quizDAO.create(newQuiz);
         if (newQuiz != null) {
-            return Response.ok(newQuiz).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(newQuiz)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -115,7 +120,8 @@ public class QuizREST {
            q.setPoints(points);
            q.setDescription(description);
            quizDAO.update(q);
-           return Response.ok(q).build(); // 200
+           Gson gson = new Gson();
+           return Response.ok(gson.toJson(q)).build();
        } else {
            return Response.noContent().build();  // 204
        }
@@ -135,14 +141,21 @@ public class QuizREST {
         AnswerOption correctOption = new AnswerOption(obj.getJsonObject("correct").getString("text"));
         List<AnswerOption> options = new ArrayList<>();
         for(int o = 0;o<opts.size();o++){
-            options.add(new AnswerOption(opts.getJsonObject(o).getString("text")));
+            AnswerOption ao = new AnswerOption(opts.getJsonObject(o).getString("text"));
+            options.add(ao);
         }
         options.add(correctOption);
         Quiz quiz = quizDAO.find(id);
-        quiz.addQuestion(new Question(text,points, options, correctOption));
+        Question nQuestion = new Question(text,points, options, correctOption);
+        for(int o = 0;o<options.size();o++){
+            options.get(o).setQuestion(nQuestion);
+        }
+        nQuestion.setQuiz(quiz);
+        quiz.addQuestion(nQuestion);
         quizDAO.update(quiz);
         if (quiz != null) {
-            return Response.ok(quiz).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(quiz)).build();// 200
         } else {
             return Response.noContent().build();  // 204
         }

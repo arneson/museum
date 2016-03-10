@@ -27,7 +27,6 @@ public class Team extends AbstractEntity {
     @Setter
     @Getter
     @OneToMany(mappedBy="team")
-    @JoinColumn(name="team_id",referencedColumnName="id")
     private List<Membership> members = new ArrayList<>();
 
     public Team() {

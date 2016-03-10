@@ -43,11 +43,17 @@ museumApp.controller('createQuizController',
             console.log('create');
             apiService.addQuiz($scope.quiz.name, $scope.quiz.points, $scope.quiz.description);
         }
+        backToAdminPage()
+        
     };
     
     $scope.cancel = function(){
         $rootScope.currentUser.activeQuiz = "";
-        $location.path('admin');
+        backToAdminPage()
     };
+    
+    function backToAdminPage(){
+        $location.path('admin');
+    }
     
 }]);

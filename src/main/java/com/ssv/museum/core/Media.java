@@ -6,6 +6,7 @@ package com.ssv.museum.core;
 
 import com.ssv.museum.persistence.AbstractEntity;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -15,8 +16,8 @@ import lombok.Setter;
 @Entity
 @XmlRootElement
 public class Media extends AbstractEntity {
-    @ManyToOne()
-    @JoinColumn(name="question_id")
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="QUESTION_ID")
     private Question question;
     @Setter
     @Getter

@@ -12,4 +12,5 @@
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/museum" object-type="user" pool-name="derby_net_museum_appPool"/>
     <jdbc-resource enabled="true" jndi-name="java:app/museum" object-type="user" pool-name="derby_net_museum_appPool"/>
+    <jdbc-resource enabled="true" jndi-name="java:app/museum" object-type="user" pool-name="derby_net_museum_appPool"/>
 </resources>

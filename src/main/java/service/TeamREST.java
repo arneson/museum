@@ -5,6 +5,7 @@
  */
 package service;
 
+import com.google.gson.Gson;
 import com.ssv.museum.core.MemberRole;
 import com.ssv.museum.core.Membership;
 import com.ssv.museum.core.Quiz;
@@ -55,7 +56,8 @@ public class TeamREST {
             @Context Request request) {
         Team team = teamDAO.find(id);
         if (team != null) {
-            return Response.ok(team).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(team)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -67,7 +69,8 @@ public class TeamREST {
         List<Team> teams = teamDAO.findAll();
         GenericEntity<Collection<Team>> ge = new GenericEntity<Collection<Team>>(teams){};
         if (teams.size()>-1) {
-            return Response.ok(ge).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(ge)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -82,7 +85,8 @@ public class TeamREST {
         Team team = teamDAO.find(id);
         if (team != null) {
             teamDAO.delete(id);
-            return Response.ok(team).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(team)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -99,7 +103,8 @@ public class TeamREST {
         Team newTeam = new Team(name, description, new ArrayList<Membership>());
         teamDAO.create(newTeam);
         if (newTeam != null) {
-            return Response.ok(newTeam).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(newTeam)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -119,7 +124,8 @@ public class TeamREST {
            t.setName(name);
            t.setDescription(description);
            teamDAO.update(t);
-           return Response.ok(t).build(); // 200
+           Gson gson = new Gson();
+            return Response.ok(gson.toJson(t)).build(); // 200
        } else {
            return Response.noContent().build();  // 204
        }
@@ -148,9 +154,11 @@ public class TeamREST {
                     m_role = MemberRole.ADMIN;
                     break;
             }
-            
-            team.addMember(new Membership(visitor, m_role));
-            return Response.ok(team).build(); // 200
+            Membership nm = new Membership(visitor, m_role);
+            nm.setTeam(team);
+            team.addMember(nm);
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(team)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }

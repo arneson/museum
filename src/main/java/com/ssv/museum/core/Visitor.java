@@ -39,12 +39,10 @@ public class Visitor extends AbstractEntity {
     @Setter
     @Getter
     @OneToMany(mappedBy="visitor")
-    @JoinColumn(name="visitor_id",referencedColumnName="id")
     private List<Answer> answers = new ArrayList<>();
     @Setter
     @Getter
     @OneToMany(mappedBy="visitor")
-    @JoinColumn(name="visitor_id",referencedColumnName="id")
     private List<CompletedQuiz> completedQuizzes = new ArrayList<>();
 
     public Visitor() {

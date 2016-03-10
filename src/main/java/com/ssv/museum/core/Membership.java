@@ -6,6 +6,7 @@ package com.ssv.museum.core;
 import com.ssv.museum.persistence.AbstractEntity;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -19,13 +20,15 @@ public class Membership extends AbstractEntity {
     @Setter
     @Getter
     private MemberRole memberRole;
-    @ManyToOne()
-    @JoinColumn(name="team_id")
+    @Setter
+    @Getter
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="TEAM_ID")
     private Team team;
     @Setter
     @Getter
-    @ManyToOne
-    @JoinColumn(name="visitor_id")
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="VISITOR_ID")
     private Visitor visitor;
     @Setter
     @Getter

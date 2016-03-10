@@ -6,6 +6,7 @@ package com.ssv.museum.core;
 import com.ssv.museum.persistence.AbstractEntity;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
@@ -19,12 +20,13 @@ import lombok.Setter;
 public class Answer extends AbstractEntity {
     @Setter
     @Getter
-    @OneToOne
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="ANSWEROPTION_ID")
     private AnswerOption answerOption;
     @Setter
     @Getter
-    @ManyToOne()
-    @JoinColumn(name="visitor_id")
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="VISITOR_ID")
     private Visitor visitor;
     @Setter
     @Getter
