@@ -8,7 +8,7 @@
         <h3>Quiz</h3>
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="quiz in quizzes">
-                <a href="#/manageQuiz/{{quiz.id}}">
+                <a href="#/manageQuiz/{{quiz.id}}" ng-click="saveId(quiz.id)">
                     {{quiz.name}}
                 </a>    
             </li>

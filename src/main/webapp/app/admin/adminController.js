@@ -7,7 +7,9 @@ museumApp.controller('adminController',['$scope','$rootScope','$location', funct
     
     $scope.quizzes = $rootScope.currentUser.quiz;
     
-    
+    $scope.saveId = function(quiz_id){
+        $rootScope.currentUser.activeQuiz = quiz_id;
+    };
     
 }]);
 
