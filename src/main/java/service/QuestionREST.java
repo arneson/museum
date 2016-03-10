@@ -77,7 +77,7 @@ public class QuestionREST {
         GenericEntity<Collection<Question>> ge = new GenericEntity<Collection<Question>>(questions){};
         if (questions.size()>-1) {
             Gson gson = new Gson();
-            return Response.ok(questions).build(); // 200
+            return Response.ok(gson.toJson(questions)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
