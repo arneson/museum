@@ -49,6 +49,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             data.description = description;
             data.password = $rootScope.currentUser.password;
             data.username = $rootScope.currentUser.username;
+            console.log("This is quiz: ", data);
             $http({
                 method  : 'POST',
                 url     : baseUrl + '/:'+$rootScope.currentUser.id+'/quizzes',
@@ -83,12 +84,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             },  function errorCallback(response) {
                 console.log("could not post quiz : ", response);
             });
-        }
-        
-        
-        
-        
-        
+        }     
     }
     
     
