@@ -195,7 +195,7 @@ public class MuseumREST extends AuthedREST {
                 museumDAO.update(m);
                 if (m != null) {
                     Gson gson = new Gson();
-                    return Response.ok(gson.toJson(newQuiz)).build();
+                    return Response.ok(newQuiz.getId()).build();
                 } else {
                     return Response.noContent().build();  // 204
                 }
