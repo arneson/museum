@@ -6,7 +6,9 @@ package com.ssv.museum.core;
 import com.ssv.museum.persistence.AbstractEntity;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -19,6 +21,7 @@ import lombok.Setter;
 public class Museum extends AbstractEntity {
     @Setter
     @Getter
+    @Column(unique=true)
     private String username;
     @Setter
     @Getter
@@ -41,8 +44,7 @@ public class Museum extends AbstractEntity {
     private String image;
     @Setter
     @Getter
-    @OneToMany(mappedBy="museum")
-    @JoinColumn(name="museum_id",referencedColumnName="id")
+    @OneToMany(mappedBy="museum", fetch=FetchType.LAZY)
     private List<Quiz> quiz = new ArrayList<>();
 
     public Museum() {

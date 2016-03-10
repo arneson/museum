@@ -26,6 +26,7 @@ import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
@@ -38,18 +39,18 @@ public class Question extends AbstractEntity {
     @Setter
     @Getter
     private int points;
-    @ManyToOne()
-    @JoinColumn(name="quiz_id")
+    @Setter
+    @Getter
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="QUIZ_ID")
     private Quiz quiz;
     @Setter
     @Getter
-    @OneToMany(mappedBy="question", cascade = CascadeType.PERSIST)
-    @JoinColumn(name="question_id",referencedColumnName="id")
+    @OneToMany(mappedBy="question", cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
     private List<AnswerOption> options = new ArrayList<>();
     @Setter
     @Getter
-    @OneToMany(mappedBy="question",cascade = CascadeType.PERSIST)
-    @JoinColumn(name="question_id",referencedColumnName="id")
+    @OneToMany(mappedBy="question",cascade = CascadeType.PERSIST, fetch=FetchType.LAZY)
     private List<Media> media =  new ArrayList<>();
     @Setter
     @Getter

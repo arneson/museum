@@ -5,6 +5,7 @@
  */
 package service;
 
+import com.google.gson.Gson;
 import com.ssv.museum.core.Quiz;
 import com.ssv.museum.core.Visitor;
 import com.ssv.museum.persistence.QuizDAO;
@@ -45,11 +46,12 @@ public class VisitorREST extends AuthedREST {
     @Path("{id: \\d+}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response find(@PathParam("id") Long id,
-            @HeaderParam("access-token") String at,
+            @HeaderParam("access_token") String at,
             @Context Request request) {
         Visitor v = visitorDAO.find(id);
         if (authVisitor(at,id) && v != null) {
-            return Response.ok(v).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(v)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -60,13 +62,14 @@ public class VisitorREST extends AuthedREST {
     @Path("{id: \\d+}")
     @Produces({MediaType.APPLICATION_JSON})
     public Response delete(@PathParam("id") Long id,
-                         @HeaderParam("access-token") String at,
+                         @HeaderParam("access_token") String at,
                          @Context Request request) {
         //to be able to check if exists
         Visitor v = visitorDAO.find(id);
         if (authVisitor(at,id) && v != null) {
             visitorDAO.delete(id);
-            return Response.ok(v).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(v)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -105,7 +108,8 @@ public class VisitorREST extends AuthedREST {
             if(v==null){
                 return signup(obj,request);
             }else{
-                return Response.ok(v).build(); // 200
+                Gson gson = new Gson();
+                return Response.ok(gson.toJson(v)).build(); // 200
             }
         } else {
             return Response.noContent().build();  // 204
@@ -118,7 +122,7 @@ public class VisitorREST extends AuthedREST {
    @Produces({MediaType.APPLICATION_JSON})
    @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
    public Response update(@PathParam("id") Long id,
-                          @HeaderParam("access-token") String at,
+                          @HeaderParam("access_token") String at,
                           JsonObject obj,@Context Request request) {
        String username = obj.getString("username");
        String city = obj.getString("city");
@@ -130,7 +134,8 @@ public class VisitorREST extends AuthedREST {
                 v.setMail(email);
                 v.setUsername(username);
                 visitorDAO.update(v);
-                return Response.ok(v).build(); // 200
+                Gson gson = new Gson();
+                return Response.ok(gson.toJson(v)).build(); // 200
             } else {
                 return Response.noContent().build();  // 204
             }     
@@ -143,11 +148,26 @@ public class VisitorREST extends AuthedREST {
     @Path("{id: \\d+}/quizzes")
     @Produces({MediaType.APPLICATION_JSON})
     public Response getQuizzes(@PathParam("id") Long id,
-            @HeaderParam("access-token") String at,
+            @HeaderParam("access_token") String at,
             @Context Request request) {
         List<Quiz> quizzes = quizDAO.getQuizzesByUser(id);
         if (authVisitor(at,id) && quizzes != null && quizzes.size()>0) {
-            return Response.ok(quizzes).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(quizzes)).build(); // 200
+        } else {
+            return Response.noContent().build();  // 204
+        }
+    }
+    //refresh points
+    @GET
+    @Path("{id: \\d+}/points")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getPoints(@PathParam("id") Long id,
+            @HeaderParam("access_token") String at,
+            @Context Request request) {
+        Visitor v = visitorDAO.find(id);
+        if (authVisitor(at,id) && v != null) {
+            return Response.ok(v.getTotalPoints()).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }

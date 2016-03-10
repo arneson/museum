@@ -5,6 +5,7 @@
  */
 package service;
 
+import com.google.gson.Gson;
 import com.ssv.museum.core.Address;
 import com.ssv.museum.core.AnswerOption;
 import com.ssv.museum.core.Museum;
@@ -56,7 +57,8 @@ public class MuseumREST extends AuthedREST {
             @Context Request request) {
         Museum m = museumDAO.find(id);
         if ( m != null) {
-            return Response.ok(m).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(m)).build();
         } else {
             return Response.noContent().build();  // 204
         }
@@ -68,7 +70,8 @@ public class MuseumREST extends AuthedREST {
         List<Museum> museums = museumDAO.findAll();
         GenericEntity<Collection<Museum>> ge = new GenericEntity<Collection<Museum>>(museums){};
         if (museums.size()>-1) {
-            return Response.ok(ge).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(ge)).build();
         } else {
             return Response.noContent().build();  // 204
         }
@@ -85,7 +88,8 @@ public class MuseumREST extends AuthedREST {
         Museum v = museumDAO.find(id);
         if (authMuseum(password,v.getUsername()) && v != null) {
             museumDAO.delete(id);
-            return Response.ok(v).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(v)).build();
         } else {
             return Response.noContent().build();  // 204
         }
@@ -107,7 +111,8 @@ public class MuseumREST extends AuthedREST {
                 password = generateHash(saltPassword(password));
                 Museum newMuseum = new Museum(username, password,email,name);
                 museumDAO.create(newMuseum);
-                return Response.ok(newMuseum).build(); // 200
+                Gson gson = new Gson();
+                return Response.ok(gson.toJson(newMuseum)).build();
             } else {
                 return Response.status(400).build();  // 400
             }
@@ -126,7 +131,8 @@ public class MuseumREST extends AuthedREST {
             String password = obj.getString("password");
             String username = obj.getString("username");
             if (authMuseum(password,username)) {
-                return Response.ok(museumDAO.findByUsername(username)).build(); // 200
+                Gson gson = new Gson();
+                return Response.ok(gson.toJson(museumDAO.findByUsername(username))).build();
             } else {
                 return Response.status(400).build();  // 400
             }
@@ -157,7 +163,8 @@ public class MuseumREST extends AuthedREST {
                 m.setUsername(username);
                 m.setDescription(description);
                 museumDAO.update(m);
-                return Response.ok(m).build(); // 200
+                Gson gson = new Gson();
+                return Response.ok(gson.toJson(m)).build();
             } else {
                 return Response.noContent().build();  // 204
             }     
@@ -180,13 +187,15 @@ public class MuseumREST extends AuthedREST {
                 String name = obj.getString("name");
                 int points = Integer.parseInt(obj.getString("points"));
                 String description = obj.getString("description");
-                Quiz newQuiz = new Quiz(name, points, new Date(), description);
-                quizDAO.create(newQuiz);
+                Quiz newQuiz = new Quiz(name, points, new Date(), description);          
                 Museum m = museumDAO.findByUsername(username);
+                newQuiz.setMuseum(m);
+                quizDAO.create(newQuiz);               
                 m.addQuiz(newQuiz);
                 museumDAO.update(m);
                 if (m != null) {
-                    return Response.ok(newQuiz).build(); // 200
+                    Gson gson = new Gson();
+                    return Response.ok(gson.toJson(m)).build();
                 } else {
                     return Response.noContent().build();  // 204
                 }

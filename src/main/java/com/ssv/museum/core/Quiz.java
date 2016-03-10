@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -34,13 +35,14 @@ public class Quiz extends AbstractEntity {
     @Setter
     @Getter
     private String description;
-    @ManyToOne()
-    @JoinColumn(name="museum_id")
+    @Setter
+    @Getter
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="MUSEUM_ID")
     private Museum museum;
     @Setter
     @Getter
-    @OneToMany(mappedBy="quiz")
-    @JoinColumn(name="quiz_id",referencedColumnName="id")
+    @OneToMany(mappedBy="quiz", fetch=FetchType.LAZY)
     private List<Question> questions = new ArrayList<>();
             
     public Quiz() {

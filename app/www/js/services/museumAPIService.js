@@ -7,6 +7,7 @@ angular.module('museum.services')
     return{
         login:function(at,callback){
             $http.post(url+'/visitor/login',{"access_token":at}).success(function(user){
+                $http.defaults.headers.common.access_token = at;
                 at = at;
                 userId = user.id;
                 callback(user);
@@ -25,6 +26,12 @@ angular.module('museum.services')
         getMuseums:function(callback){
             $http.get(url+'/museum/')
                 .success(callback);
+        },
+        refreshPoints:function(){
+            $http.get(url+'/visitor/'+userId+'/points')
+                .success(function(points){
+                    $rootScope.currentUser.points = 0;
+                });
         }
     }
 });
