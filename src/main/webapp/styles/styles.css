@@ -4,6 +4,19 @@
     Author     : Sebastian
 */
 
+.navbar{
+    min-height: 70px;
+    border-radius: 0px;
+}
+
+.sign-out-btn{
+    margin-top:8px
+}
+
+.page-header{
+    margin: 20px 0 20px;
+}
+
 .brand-img{
     width: 40px;
 }
@@ -38,10 +51,8 @@
 }
 
 .answerOp-icon{
-    font-size: 25px; 
+    font-size: 30px; 
 }
-
-
 
 .answerOp a{
     color: white;

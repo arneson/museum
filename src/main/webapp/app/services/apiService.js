@@ -80,6 +80,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             });
         },
         addQuestion: function(id, question, points, correct, opt1, opt2, opt3, opt4){
+            console.log('this is what im doing');
             var data = {};
             data.question = question;
             data.points = points+'';
@@ -118,7 +119,14 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             },  function errorCallback(response) {
                 console.log("could not post question : ", response);
             });
-        }     
+        },
+        getQuestions: function(id){
+            
+            return $http({
+                method  : 'GET',
+                url     : 'http://localhost:8080/museum/webresources/quiz/'+id+'/questions'
+            });
+        }
     }
     
     var update = function(user){

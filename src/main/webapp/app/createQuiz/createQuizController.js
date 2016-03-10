@@ -1,29 +1,40 @@
 museumApp.controller('createQuizController',
-    ['$scope','$location', 'apiService', '$rootScope',
+    ['$scope','$location', 'apiService', '$rootScope','apiService',
     
-    function($scope, $location, apiService, $rootScope){
-    //$scope.questions = 
-    
+    function($scope, $location, apiService, $rootScope, apiService){
     $scope.init = function(){
       
       if($rootScope.currentUser.quiz !== undefined){
-          var l = $rootScope.currentUser.quiz.length; 
+        
+        var url = $location.url();
+        if(url.indexOf('manageQuiz') > -1){  
+            console.log('doing shit');
+            var l = $rootScope.currentUser.quiz.length; 
 
-        for(var i=0; i < l; i++){
-            if($rootScope.currentUser.quiz[i].id === $rootScope.currentUser.activeQuiz){
-                $scope.quiz = $rootScope.currentUser.quiz[i];
-            } 
+            for(var i=0; i < l; i++){
+                if($rootScope.currentUser.quiz[i].id === $rootScope.currentUser.activeQuiz){
+                    $scope.quiz = $rootScope.currentUser.quiz[i];
+                } 
+            }
+            apiService.getQuestions($rootScope.currentUser.activeQuiz).then(
+                    function(res){
+                        console.log("this is res", res.data);
+                        $scope.questions = res.data;
+                    },function(err){
+            });
         }
       }
         
     };
     
-    $scope.routeToQuestion = function(question_id){
+    $scope.routeToQuestion = function(question){
         var address;
         
-        if(question_id){
-            address = $location.url() + '/question/' + question_id;
+        if(question){
+            $rootScope.currentUser.activeQuestion = question;
+            address = $location.url() + '/question/' + question.id;
         }else{
+            $rootScope.currentUser.activeQuestion=undefined;
             address = $location.url() + '/addQuestion';
         }
         
