@@ -160,6 +160,20 @@ public class QuizREST {
             return Response.noContent().build();  // 204
         }
     }
+    //questions
+    @GET
+    @Path("{id: \\d+}/questions")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getQuestions(@PathParam("id") Long id,
+            @Context Request request) {
+        Quiz quiz = quizDAO.find(id);
+        if (quiz != null) {
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(quiz.getQuestions())).build(); // 200
+        } else {
+            return Response.noContent().build();  // 204
+        }
+    }
 
 
     private QuizDAO lookupQuizDAOBean() {

@@ -133,17 +133,17 @@ Button.grey {
   margin-bottom: 20px; }
 
 .museums-list {
-  margin-top: 40px; }
+  margin-top: 60px; }
 
 .main .top {
-  margin-top: 40px; }
+  margin-top: 50px; }
 
 .profilePicture {
   border-radius: 50%;
   width: 100px;
   height: 100px;
   display: inline-block;
-  margin-top: 5px; }
+  margin-top: 20px; }
 
 .menuHeader {
   text-align: center; }

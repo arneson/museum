@@ -20,8 +20,10 @@ angular.module('museum.controllers')
         }
     }
     $scope.backClick = function(option){
-        museumAPIService.refreshPoints();
-        $state.go('app.main');
+        museumAPIService.refreshPoints(function(points){
+            $rootScope.currentUser.totalPoints = points;
+            $state.go('app.main');
+        });
     }
     function answerCallback(response){
         console.log(response);

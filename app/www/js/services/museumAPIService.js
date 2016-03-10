@@ -27,11 +27,9 @@ angular.module('museum.services')
             $http.get(url+'/museum/')
                 .success(callback);
         },
-        refreshPoints:function(){
+        refreshPoints:function(callback){
             $http.get(url+'/visitor/'+userId+'/points')
-                .success(function(points){
-                    $rootScope.currentUser.points = 0;
-                });
+                .success(callback);
         }
     }
 });
