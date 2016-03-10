@@ -11,4 +11,22 @@ angular.module('museum.controllers')
             //$state.go('login');
         }
     });
+    
+    $rootScope.menuItems = [
+        {
+              text:"Anslut till grupp",
+              icon:"ion-ios-people",
+              onClick:joinClick  
+        },
+        {
+              text:"Hitta museum",
+              icon:"ion-android-map",
+              onClick:museumClick  
+        },
+        {
+              text:"Mina quiz",
+              icon:"ion-android-map",
+              onClick:quizClick  
+        }
+    ]
 });

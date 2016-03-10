@@ -13,16 +13,17 @@
   <ion-side-menu side="left" class="navigationMenu" width="250">
 
     <div class="menuHeader">
-      <div class="profilePicture" ng-click="changeProfileImage()" style="background:url({{currentUserImage}}) no-repeat center center;background-size:cover;"></div>
-      <h1>{{$root.currentUserName}}</h1>
+      <div class="profilePicture" ng-click="changeProfileImage()" style="background:url(http://graph.facebook.com/{{currentUser.fbId}}/picture?type=large) no-repeat center center;background-size:cover;"></div>
+      <h2>{{$root.currentUser.username}}</h2>
     </div>
-
-    <ion-content class="menuContent" overflow-scroll="false" scrollbar-y="false">
-      
-      <div class="topPadding" ng-click="changeProfileImage()" ></div>
-
-
-    </ion-content>
+    <div class="list menu-list">
+        <div ng-click="menuitem.onClick" ng-repeat="menuitem in menuitems" class="item item-button-right">
+            {{menuitem.text}}
+            <button class="button button-positive">
+                <i class="icon {{menuitem.icon}}"></i>
+            </button>
+        </div>
+    </div>
   </ion-side-menu>
 
   

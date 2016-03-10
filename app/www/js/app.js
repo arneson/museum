@@ -49,8 +49,10 @@ angular.module('museum', ['ionic','museum.controllers', 'museum.services'])
     .state('app.museums', {
         url: "/museums",
         views: {
-            templateUrl: 'views/museums.html',
-            controller: 'museumsController'
+            'menuContent': {
+                templateUrl: 'views/museums.html',
+                controller: 'museumsController'
+            }
         }
     })
     .state('question', {

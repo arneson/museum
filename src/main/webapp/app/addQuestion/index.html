@@ -1,13 +1,13 @@
 <div ng-controller="addQuestionController" class="col-md-3">
-    <form role="form">
+    <form role="form" ng-submit="submit()">
         <div class="form-group">
             <label for="question">Question:</label>
-            <textarea type="text" class="form-control" id="question" ng-model="question.question"></textarea>        
+            <input type="text" class="form-control" id="question" ng-model="question.question" required>        
         </div>
         <br>
         <br>
         <div class="form-group">
-            <label for="answer1">Answer 1:</label>
+            <label for="answer">Answer 1:</label>
             <input type="text" class="form-control" id="answer1" ng-model="question.answer1">          
         </div>
         <div class="form-group">
@@ -28,6 +28,7 @@
             <input type="number" class="form-control" id="points" ng-model="question.points">          
         </div>
         <br>
+        <input type="submit" id="submit" value="Submit">
         <span>question = {{question}}</span>
     </form>
 </div>
