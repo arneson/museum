@@ -30,6 +30,5 @@ angular.module('museum.controllers')
     function loginSuccess(user){
         $rootScope.currentUser = user;
         $state.go('app.main');
-        console.log(user);
     };
 });

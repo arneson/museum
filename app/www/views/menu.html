@@ -2,7 +2,10 @@
 
   <ion-pane ion-side-menu-content>
 
-
+    <div class="bar bar-header">
+        <button ng-click="leftMenuClick()" class="button button-icon icon {{backEnabled?'ion-ios-arrow-back':'ion-navicon'}}"></button>
+        <div class="h1 title"></div>
+    </div>
 
     <ion-nav-view name="menuContent"></ion-nav-view>
 
@@ -13,11 +16,11 @@
   <ion-side-menu side="left" class="navigationMenu" width="250">
 
     <div class="menuHeader">
-      <div class="profilePicture" ng-click="changeProfileImage()" style="background:url(http://graph.facebook.com/{{currentUser.fbId}}/picture?type=large) no-repeat center center;background-size:cover;"></div>
-      <h2>{{$root.currentUser.username}}</h2>
+      <div class="profilePicture" ng-click="changeProfileImage()" style="background:url(https://graph.facebook.com/{{currentUser.fbId}}/picture?type=large) no-repeat center center;background-size:cover;"></div>
+      <h3>{{$root.currentUser.username}}</h3>
     </div>
     <div class="list menu-list">
-        <div ng-click="menuitem.onClick" ng-repeat="menuitem in menuitems" class="item item-button-right">
+        <div ng-click="{{menuitem.onClick}}" ng-repeat="menuitem in menuItems" class="item item-button-right">
             {{menuitem.text}}
             <button class="button button-positive">
                 <i class="icon {{menuitem.icon}}"></i>

@@ -108,7 +108,7 @@ public class MuseumREST extends AuthedREST {
             museumDAO.create(newMuseum);
             return Response.ok(newMuseum).build(); // 200
         } else {
-            return Response.noContent().build();  // 204
+            return Response.status(400).build();  // 400
         }
     }
     //login
@@ -123,7 +123,7 @@ public class MuseumREST extends AuthedREST {
         if (authMuseum(password,username)) {
             return Response.ok(museumDAO.findByUsername(username)).build(); // 200
         } else {
-            return Response.status(400).build();  // 204
+            return Response.status(400).build();  // 400
         }
     }
     
