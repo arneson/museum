@@ -4,6 +4,15 @@
     Author     : Sebastian
 */
 
+.navbar{
+    min-height: 70px;
+    border-radius: 0px;
+}
+
+.page-header{
+    margin: 20px 0 20px;
+}
+
 .brand-img{
     width: 40px;
 }
