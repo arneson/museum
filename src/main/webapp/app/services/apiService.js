@@ -42,8 +42,11 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             });
         },
         
-        addQuiz: function(){
+        addQuiz: function(name, points, description){
             var data = {};
+            data.name = name;
+            data.points = points;
+            data.description = description;
             data.password = $rootScope.currentUser.password;
             data.username = $rootScope.currentUser.username;
             $http({
