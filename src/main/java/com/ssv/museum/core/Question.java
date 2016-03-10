@@ -26,6 +26,8 @@ import java.util.Hashtable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 @XmlRootElement
@@ -36,13 +38,18 @@ public class Question extends AbstractEntity {
     @Setter
     @Getter
     private int points;
+    @ManyToOne()
+    @JoinColumn(name="quiz_id")
+    private Quiz quiz;
     @Setter
     @Getter
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy="question", cascade = CascadeType.PERSIST)
+    @JoinColumn(name="question_id",referencedColumnName="id")
     private List<AnswerOption> options = new ArrayList<>();
     @Setter
     @Getter
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy="question",cascade = CascadeType.PERSIST)
+    @JoinColumn(name="question_id",referencedColumnName="id")
     private List<Media> media =  new ArrayList<>();
     @Setter
     @Getter

@@ -7,6 +7,7 @@ import com.ssv.museum.persistence.AbstractEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -40,7 +41,8 @@ public class Museum extends AbstractEntity {
     private String image;
     @Setter
     @Getter
-    @OneToMany
+    @OneToMany(mappedBy="museum")
+    @JoinColumn(name="museum_id",referencedColumnName="id")
     private List<Quiz> quiz = new ArrayList<>();
 
     public Museum() {

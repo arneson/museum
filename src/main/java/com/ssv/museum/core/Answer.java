@@ -6,6 +6,8 @@ package com.ssv.museum.core;
 import com.ssv.museum.persistence.AbstractEntity;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -19,6 +21,11 @@ public class Answer extends AbstractEntity {
     @Getter
     @OneToOne
     private AnswerOption answerOption;
+    @Setter
+    @Getter
+    @ManyToOne()
+    @JoinColumn(name="visitor_id")
+    private Visitor visitor;
     @Setter
     @Getter
     private boolean wasCorrect;

@@ -6,6 +6,7 @@
 package com.ssv.museum.persistence;
 
 import com.ssv.museum.core.Quiz;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +28,10 @@ public class QuizDAO extends AbstractDAO<Quiz, Long> {
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    public List<Quiz> getQuizzesByUser(Long id) {
+        return null;
     }
     
 }

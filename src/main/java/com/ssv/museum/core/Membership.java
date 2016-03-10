@@ -6,6 +6,7 @@ package com.ssv.museum.core;
 import com.ssv.museum.persistence.AbstractEntity;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -18,10 +19,14 @@ public class Membership extends AbstractEntity {
     @Setter
     @Getter
     private MemberRole memberRole;
+    @ManyToOne()
+    @JoinColumn(name="team_id")
+    private Team team;
     @Setter
     @Getter
     @ManyToOne
-    private Visitor user;
+    @JoinColumn(name="visitor_id")
+    private Visitor visitor;
     @Setter
     @Getter
     @Temporal(javax.persistence.TemporalType.DATE)
@@ -31,13 +36,13 @@ public class Membership extends AbstractEntity {
     }
 
     public Membership(Visitor user, MemberRole memberRole) {
-        this.user = user;
+        this.visitor = user;
         this.memberRole = memberRole;
         this.dateJoined = new Date();
     }
 
     @Override
     public String toString() {
-        return "Membership{" + "user=" + user.toString()+" role="+memberRole.toString()+'}';
+        return "Membership{" + "visitor=" + visitor.toString()+" role="+memberRole.toString()+'}';
     }
 }

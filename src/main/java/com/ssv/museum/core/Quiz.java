@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
@@ -31,9 +34,13 @@ public class Quiz extends AbstractEntity {
     @Setter
     @Getter
     private String description;
+    @ManyToOne()
+    @JoinColumn(name="museum_id")
+    private Museum museum;
     @Setter
     @Getter
-    @OneToMany
+    @OneToMany(mappedBy="quiz")
+    @JoinColumn(name="quiz_id",referencedColumnName="id")
     private List<Question> questions = new ArrayList<>();
             
     public Quiz() {
