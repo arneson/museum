@@ -4,6 +4,10 @@
     Author     : Sebastian
 */
 
+.brand-img{
+    width: 40px;
+}
+
 .answerOp{
     text-align: center;
     margin-top: 20px;
