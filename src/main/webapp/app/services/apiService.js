@@ -52,7 +52,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             console.log("This is quiz: ", data);
             $http({
                 method  : 'POST',
-                url     : baseUrl + '/:'+$rootScope.currentUser.id+'/quizzes',
+                url     : baseUrl + '/'+$rootScope.currentUser.id+'/quizzes',
                 data    : data
             }).then(function successCallback(response){
                 console.log("posted quiz: ", response)
@@ -77,7 +77,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             data.username = $rootScope.currentUser.username;
             $http({
                 method  : 'POST',
-                url     : baseUrl + '/:'+id+'/quizzes',
+                url     : baseUrl + '/'+id+'/quizzes',
                 data    : data
             }).then(function successCallback(response){
                 console.log("posted quiz: ", response)
