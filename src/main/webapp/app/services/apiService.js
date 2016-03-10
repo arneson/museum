@@ -55,12 +55,12 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 url     : baseUrl + '/'+$rootScope.currentUser.id+'/quizzes',
                 data    : data
             }).then(function successCallback(response){
-                console.log("posted quiz: ", response)
+                console.log("posted quiz: ", response);
             },  function errorCallback(response) {
                 console.log("could not post quiz : ", response);
             });
         },
-        editQuiz: function(name, points, description){
+        editQuiz: function(name, points, description, id){
             var data = {};
             data.name = name;
             data.points = points;
@@ -70,17 +70,16 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             console.log("This is quiz: ", data);
             $http({
                 method  : 'PUT',
-                url     : baseUrl + '/'+$rootScope.currentUser.id+'/quizzes',
+                url     : 'http://localhost:8080/museum/webresources/' +id+'/quizzes',
                 data    : data
             }).then(function successCallback(response){
-                console.log("Updated quiz: ", response)
+                console.log("Updated quiz: ", response);
             },  function errorCallback(response) {
                 console.log("could not update quiz : ", response);
             });
         },
         addQuestion: function(question, points, correct, opt1, opt2, opt3, opt4, opt5, opt6){
-            var id = $rootScope.currentUser.id;
-            var data = {}
+            var data = {};
             data.question = question;
             data.points = points;
             data.options = [];
@@ -95,10 +94,10 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             data.username = $rootScope.currentUser.username;
             $http({
                 method  : 'POST',
-                url     : baseUrl + '/'+id+'/quizzes',
+                url     : baseUrl + '/'+$rootScope.currentUser.id+'/quizzes',
                 data    : data
             }).then(function successCallback(response){
-                console.log("posted quiz: ", response)
+                console.log("posted quiz: ", response);
             },  function errorCallback(response) {
                 console.log("could not post quiz : ", response);
             });
