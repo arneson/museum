@@ -55,6 +55,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 url     : baseUrl + '/'+$rootScope.currentUser.id+'/quizzes',
                 data    : data
             }).then(function successCallback(response){
+                $rootScope.currentUser.quiz.push(response);
                 console.log("posted quiz: ", response);
             },  function errorCallback(response) {
                 console.log("could not post quiz : ", response);
@@ -78,7 +79,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 console.log("could not update quiz : ", response);
             });
         },
-        addQuestion: function(question, points, correct, opt1, opt2, opt3, opt4, opt5, opt6){
+        addQuestion: function(id, question, points, correct, opt1, opt2, opt3, opt4){
             var data = {};
             data.question = question;
             data.points = points;
@@ -104,5 +105,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
         }     
     }
     
-    
+    var update = function(user){
+        
+    }
 }); 
