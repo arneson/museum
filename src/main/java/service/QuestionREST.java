@@ -172,7 +172,7 @@ public class QuestionREST {
             if(result){
                 visitor.addPoints(question.getPoints());
             }
-            
+            visitorDAO.update(visitor); 
             return Response.ok(question).build(); // 200
         } else {
             return Response.noContent().build();  // 204

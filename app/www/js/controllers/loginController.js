@@ -10,7 +10,10 @@ angular.module('museum.controllers')
     $scope.loginClick = function(){
         if(window.device){
             facebookConnectPlugin.login(["public_profile,user_friends,email"],
-                loginSuccess,
+                function (res) {
+                if (res.status == "connected" && res.authResponse) {
+                    FBlogin(res.authResponse.accessToken);
+                }},
                 function (error) { alert("" + error) }
             );
         }else{

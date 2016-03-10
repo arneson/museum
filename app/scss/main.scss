@@ -74,6 +74,7 @@ Button.grey {
   
 .logo-wrapper{
     width: 100%;
+    margin-top:5vw;
     text-align: center;
     img{
         display: inline-block;
@@ -116,4 +117,23 @@ Button.grey {
 }
 .Button-option{
     width:90vw;
+    .ion-close-round{
+        color:red;
+    }
+    .ion-ios-checkmark-outline{
+        color:green;
+    }
+}
+.Button-wide{
+    width:90vw;
+}
+#Button-back{
+    margin-top: 20px;
+    background-color: grey;
+    .back-text{
+        width: 100%;
+    }
+}
+.Button-main{
+    margin-bottom: 20px;
 }

@@ -6,6 +6,8 @@
 package com.ssv.museum.persistence;
 
 import com.ssv.museum.core.Museum;
+import com.ssv.museum.core.Visitor;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,8 +32,12 @@ public class MuseumDAO extends AbstractDAO<Museum, Long> {
     }
 
     public Museum findByUsername(String username) {
-         return em.createQuery("SELECT * FROM museum WHERE username = "+username, Museum.class)
-                .getSingleResult();
+         List<Museum> museums  = em.createQuery("SELECT m FROM Museum m WHERE m.username = :username", Museum.class)
+                .setParameter("username", username).getResultList();
+        if(museums.isEmpty())
+            return null;
+        else
+            return museums.get(0);
     }
     
 }

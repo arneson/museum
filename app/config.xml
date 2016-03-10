@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.cymonit.museum" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-  <name>Museum app</name>
+<widget id="com.cymonit.museumsjakten" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+  <name>Museumsjakten</name>
   <description>
         Partner app used by visitors to scan QR-codes and answer questions
     </description>

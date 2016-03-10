@@ -89,7 +89,7 @@ public class QuizREST {
     public Response create(JsonObject obj,
                          @Context Request request) {
         String name = obj.getString("name");
-        int points = obj.getJsonNumber("points").intValue();
+        int points = Integer.parseInt(obj.getString("points"));
         String description = obj.getString("description");
         Quiz newQuiz = new Quiz(name, points, new Date(), description);
         quizDAO.create(newQuiz);
@@ -107,7 +107,7 @@ public class QuizREST {
    public Response update(@PathParam("id") Long id,
                           JsonObject obj,@Context Request request) {
        String name = obj.getString("name");
-       int points = obj.getJsonNumber("points").intValue();
+       int points = Integer.parseInt(obj.getString("points"));
        String description = obj.getString("description");
        Quiz q = quizDAO.find(id);
        if (q != null) {
@@ -129,16 +129,17 @@ public class QuizREST {
     public Response addQuestion(JsonObject obj,
                         @PathParam("id") Long id,
                         @Context Request request) {
-        int points = obj.getJsonNumber("points").intValue();
-        String description = obj.getString("description");
+        int points = Integer.parseInt(obj.getString("points"));
+        String text = obj.getString("question");
         JsonArray opts = obj.getJsonArray("options");
         AnswerOption correctOption = new AnswerOption(obj.getJsonObject("correct").getString("text"));
         List<AnswerOption> options = new ArrayList<>();
         for(int o = 0;o<opts.size();o++){
             options.add(new AnswerOption(opts.getJsonObject(o).getString("text")));
         }
+        options.add(correctOption);
         Quiz quiz = quizDAO.find(id);
-        quiz.addQuestion(new Question(description,points, options, correctOption));
+        quiz.addQuestion(new Question(text,points, options, correctOption));
         quizDAO.update(quiz);
         if (quiz != null) {
             return Response.ok(quiz).build(); // 200
