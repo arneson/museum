@@ -8,9 +8,20 @@
     text-align: center;
     margin-top: 10px;
     border-radius: 20px !important;
-    background-color: activeborder;
+    background-color: #428bca;
     color: white;
+    cursor: pointer;
 }
+
+.answerOp:hover{
+    background-color: #3276b1;
+}
+
+.answerOp:active{
+    box-shadow: inset 0px 5px 20px 0px rgba(0,0,0,0.2);
+}
+
+
 
 .answerOp a{
     color: white;
