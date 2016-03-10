@@ -1,6 +1,6 @@
 
 museumApp.factory('apiService', function($rootScope,$http,$location){
-   var baseUrl = 'http://localhost:8080/Museum/webresources/museum';
+   var baseUrl = 'http://localhost:8080/museum/webresources/museum';
     return {
         
         login: function(username, password){
