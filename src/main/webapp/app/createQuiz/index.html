@@ -4,9 +4,14 @@
             <label for="title">Quiz Title</label>
             <input ng-model="quiz.title" class="form-control" type="text" ng-required="true" id="title">
         </div>
-        <div class="form-group well well-sm" ng-controller="questionController">
+        <div class="form-group well well-sm">
             <ul class="list-group">
-                <questions></questions>
+                <li class="list-group-item answerOp answerOp-blue" ng-repeat="question in questions" ng-click="routeToQuestion(question.id)">
+                    {{question.text}}
+                </li>
+                <li class="list-group answerOp answerOp-green answerOp-icon" ng-click="routeToQuestion()">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                </li>
             </ul>   
         </div>
     </form>

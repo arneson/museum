@@ -8,9 +8,36 @@
     text-align: center;
     margin-top: 10px;
     border-radius: 20px !important;
-    background-color: activeborder;
+    cursor: pointer;
+}
+
+.answerOp-blue{
+    background-color: #428bca;
     color: white;
 }
+
+.answerOp-blue:hover{
+    background-color: #3276b1;
+}
+
+.answerOp:active{
+    box-shadow: inset 0px 5px 20px 0px rgba(0,0,0,0.2);
+}
+
+.answerOp-green{
+    background-color: #5cb85c;
+    color: white;
+}
+
+.answerOp-green:hover{
+    background-color: #47A447;
+}
+
+.answerOp-icon{
+    font-size: 25px; 
+}
+
+
 
 .answerOp a{
     color: white;
