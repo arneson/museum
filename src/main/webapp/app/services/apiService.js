@@ -55,7 +55,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 url     : baseUrl + '/'+$rootScope.currentUser.id+'/quizzes',
                 data    : data
             }).then(function successCallback(response){
-                $rootScope.currentUser.quiz.push(response);
+                $rootScope.currentUser.quiz.push(response.data);
                 console.log("posted quiz: ", response);
             },  function errorCallback(response) {
                 console.log("could not post quiz : ", response);
