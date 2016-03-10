@@ -8,7 +8,9 @@ import com.ssv.museum.persistence.AbstractEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,7 +26,8 @@ public class Team extends AbstractEntity {
     private String description;
     @Setter
     @Getter
-    @OneToMany
+    @OneToMany(mappedBy="team")
+    @JoinColumn(name="team_id",referencedColumnName="id")
     private List<Membership> members = new ArrayList<>();
 
     public Team() {

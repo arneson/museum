@@ -7,7 +7,10 @@ import com.ssv.museum.persistence.AbstractEntity;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;
@@ -35,11 +38,13 @@ public class Visitor extends AbstractEntity {
     private int totalPoints;
     @Setter
     @Getter
-    @OneToMany
+    @OneToMany(mappedBy="visitor")
+    @JoinColumn(name="visitor_id",referencedColumnName="id")
     private List<Answer> answers = new ArrayList<>();
     @Setter
     @Getter
-    @OneToMany
+    @OneToMany(mappedBy="visitor")
+    @JoinColumn(name="visitor_id",referencedColumnName="id")
     private List<CompletedQuiz> completedQuizzes = new ArrayList<>();
 
     public Visitor() {

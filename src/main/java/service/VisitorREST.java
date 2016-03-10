@@ -5,8 +5,11 @@
  */
 package service;
 
+import com.ssv.museum.core.Quiz;
 import com.ssv.museum.core.Visitor;
+import com.ssv.museum.persistence.QuizDAO;
 import com.ssv.museum.persistence.VisitorDAO;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.json.JsonObject;
@@ -35,6 +38,7 @@ public class VisitorREST extends AuthedREST {
     
     //DAO
     VisitorDAO visitorDAO = lookupVisitorDAOBean();
+    QuizDAO quizDAO = lookupQuizDAOBean();
     
     //find
     @GET
@@ -134,11 +138,34 @@ public class VisitorREST extends AuthedREST {
            return Response.noContent().build();
        }
    }
+   //find
+    @GET
+    @Path("{id: \\d+}/quizzes")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getQuizzes(@PathParam("id") Long id,
+            @HeaderParam("access-token") String at,
+            @Context Request request) {
+        List<Quiz> quizzes = quizDAO.getQuizzesByUser(id);
+        if (authVisitor(at,id) && quizzes != null && quizzes.size()>0) {
+            return Response.ok(quizzes).build(); // 200
+        } else {
+            return Response.noContent().build();  // 204
+        }
+    }
     
     private VisitorDAO lookupVisitorDAOBean() {
         try {
             javax.naming.Context c = new InitialContext();
             return (VisitorDAO) c.lookup("java:global/Museum/VisitorDAO!com.ssv.museum.persistence.VisitorDAO");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+    private QuizDAO lookupQuizDAOBean() {
+        try {
+            javax.naming.Context c = new InitialContext();
+            return (QuizDAO) c.lookup("java:global/Museum/QuizDAO!com.ssv.museum.persistence.QuizDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
