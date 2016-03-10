@@ -5,14 +5,17 @@ museumApp.controller('createQuizController',
     //$scope.questions = 
     
     $scope.init = function(){
-      console.log('fucked up shit');
-      var l = $rootScope.currentUser.quiz.length; 
       
-      for(var i=0; i < l; i++){
-          if($rootScope.currentUser.quiz[i].id === $rootScope.currentUser.activeQuiz){
-              $scope.quiz = $rootScope.currentUser.quiz[i];
-          } 
+      if($rootScope.currentUser.quiz !== undefined){
+          var l = $rootScope.currentUser.quiz.length; 
+
+        for(var i=0; i < l; i++){
+            if($rootScope.currentUser.quiz[i].id === $rootScope.currentUser.activeQuiz){
+                $scope.quiz = $rootScope.currentUser.quiz[i];
+            } 
+        }
       }
+        
     };
     
     $scope.routeToQuestion = function(question_id){
