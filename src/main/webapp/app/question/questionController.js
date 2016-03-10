@@ -44,6 +44,6 @@ museumApp.directive('questions', [function(){
         return {
           restrict: 'E',
           templateUrl: 'app/question/questionTmpl.html',
-          controller: 'questionController'
+          controller: 'createQuizController'
         };
 }]);
