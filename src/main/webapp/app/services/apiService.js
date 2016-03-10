@@ -33,10 +33,10 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 url     : baseUrl + '/signup',
                 data    : data
             }).then(function successCallback(response){
-                $rootScope.currentUser = response;
+                $rootScope.currentUser = response.data;
                 $rootScope.currentUser.password = password;
                 $location.path('/admin');
-                console.log("registerSuccess for: ", response);
+                console.log("registerSuccess for: ", response.data);
             },  function errorCallback(response) {
                 console.log("registerFail for: ", response);
             });
@@ -71,7 +71,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             console.log("This is quiz: ", data);
             $http({
                 method  : 'PUT',
-                url     : 'http://localhost:8080/museum/webresources/quiz/' +id,
+                url     : 'http://localhost:8080/museum/webresources/quiz/'+id,
                 data    : data
             }).then(function successCallback(response){
                 console.log("Updated quiz: ", response);
@@ -82,25 +82,41 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
         addQuestion: function(id, question, points, correct, opt1, opt2, opt3, opt4){
             var data = {};
             data.question = question;
-            data.points = points;
-            data.options = [];
-            var text = {};
-            text.text = opt1;
-            data.options.push(text);
-            console.log(data.options);
+            data.points = points+'';
+            data.options = [
+                {
+                    "text"  : opt1
+                },
+                {
+                    "text"  : opt2
+                },
+                {
+                    "text"  : opt3,
+                },
+                {
+                    "text"  : opt4,
+                }
+            ];
+            for(var i = 0; i<data.options.length; i++){
+                if(data.options[i].text == correct){
+                    data.correct = data.options.splice(i,1)[0];
+                }
+            }
+            
             //TODO Fix options!
             //data.options.push(opt1);
             
             data.password = $rootScope.currentUser.password;
             data.username = $rootScope.currentUser.username;
+            console.log(data);
             $http({
                 method  : 'POST',
-                url     : baseUrl + '/'+$rootScope.currentUser.id+'/quizzes',
+                url     : 'http://localhost:8080/museum/webresources/quiz/'+$rootScope.currentUser.activeQuiz+'/questions',
                 data    : data
             }).then(function successCallback(response){
-                console.log("posted quiz: ", response);
+                console.log("posted question: ", response);
             },  function errorCallback(response) {
-                console.log("could not post quiz : ", response);
+                console.log("could not post question : ", response);
             });
         }     
     }
