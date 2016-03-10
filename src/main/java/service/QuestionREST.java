@@ -187,7 +187,7 @@ public class QuestionREST {
             }
             visitorDAO.update(visitor); 
             Gson gson = new Gson();
-            return Response.ok(gson.toJson(a)).build();
+            return Response.ok().build();
         } else {
             return Response.noContent().build();  // 204
         }

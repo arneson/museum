@@ -167,7 +167,8 @@ public class VisitorREST extends AuthedREST {
             @Context Request request) {
         Visitor v = visitorDAO.find(id);
         if (authVisitor(at,id) && v != null) {
-            return Response.ok(v.getTotalPoints()).build(); // 200
+            Gson gson = new Gson();
+            return Response.ok(v.getTotalPoints()).build(); 
         } else {
             return Response.noContent().build();  // 204
         }
