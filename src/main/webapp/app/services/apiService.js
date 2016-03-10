@@ -71,7 +71,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             console.log("This is quiz: ", data);
             $http({
                 method  : 'PUT',
-                url     : 'http://localhost:8080/museum/webresources/' +id+'/quizzes',
+                url     : 'http://localhost:8080/museum/webresources/quiz/' +id,
                 data    : data
             }).then(function successCallback(response){
                 console.log("Updated quiz: ", response);
