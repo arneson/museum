@@ -80,6 +80,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             });
         },
         addQuestion: function(id, question, points, correct, opt1, opt2, opt3, opt4){
+            console.log('this is what im doing');
             var data = {};
             data.question = question;
             data.points = points+'';

@@ -5,21 +5,24 @@ museumApp.controller('createQuizController',
     $scope.init = function(){
       
       if($rootScope.currentUser.quiz !== undefined){
-          var l = $rootScope.currentUser.quiz.length; 
+        
+        var url = $location.url();
+        if(url.indexOf('manageQuiz') > -1){  
+            console.log('doing shit');
+            var l = $rootScope.currentUser.quiz.length; 
 
-        for(var i=0; i < l; i++){
-            if($rootScope.currentUser.quiz[i].id === $rootScope.currentUser.activeQuiz){
-                $scope.quiz = $rootScope.currentUser.quiz[i];
-            } 
+            for(var i=0; i < l; i++){
+                if($rootScope.currentUser.quiz[i].id === $rootScope.currentUser.activeQuiz){
+                    $scope.quiz = $rootScope.currentUser.quiz[i];
+                } 
+            }
+            apiService.getQuestions($rootScope.currentUser.activeQuiz).then(
+                    function(res){
+                        console.log("this is res", res.data);
+                        $scope.questions = res.data;
+                    },function(err){
+            });
         }
-        apiService.getQuestions($rootScope.currentUser.activeQuiz).then(
-                function(res){
-                    console.log("this is res", res.data);
-                    $scope.questions = res.data;
-                },function(err){
-                    
-                });
-
       }
         
     };
