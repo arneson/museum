@@ -1,4 +1,4 @@
-museumApp.controller('registerController',['$scope','$http', function($scope,$http){
+museumApp.controller('registerController',['$scope','$http','$location', function($scope,$http,$location){
     $scope.register = function(){
         var data = {
             "name"      : $scope.name,
@@ -11,7 +11,7 @@ museumApp.controller('registerController',['$scope','$http', function($scope,$ht
             url: 'http://localhost:8080/Museum/webresources/museum/signup',
             data: data
         }).then(function successCallback(response){
-            
+            $location.path('#/admin');
             console.log("registerSuccess for: ", response);
         },  function errorCallback(response) {
             console.log("registerFail for: " + response);
