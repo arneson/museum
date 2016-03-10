@@ -5,8 +5,13 @@
             <input ng-model="quiz.title" class="form-control" type="text" ng-required="true" id="title">
         </div>
         <div class="form-group well well-sm" ng-controller="questionController">
-            <question></question>
+            <ul class="list-group">
+                <questions></questions>
+            </ul>   
         </div>
     </form>
     <button type="submit" class="btn btn-success">Save Quiz</button>
+     <a class="btn btn-primary" role="button" href="#/admin">
+        Cancel
+    </a>
 </div>

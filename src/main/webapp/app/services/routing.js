@@ -8,27 +8,35 @@ museumApp.config(['$routeProvider',
     function($routeProvider){
         $routeProvider.
                 when('/login',{
-                    templateUrl: 'app/login/index.html',
-                    controller: 'loginController'
+                    templateUrl : 'app/login/index.html',
+                    controller  : 'loginController'
+                }).
+                when('/register',{
+                    templateUrl : 'app/register/index.html',
+                    controller  : 'registerController'
                 }).
                 when('/admin',{
-                    templateUrl: 'app/admin/index.html',
-                    controller: 'adminController'
+                    templateUrl : 'app/admin/index.html',
+                    controller  : 'adminController'
                 }).
                 when('/createQuiz',{
-                    templateUrl: 'app/createQuiz/index.html',
-                    controller: 'createQuizController'
+                    templateUrl : 'app/createQuiz/index.html',
+                    controller  : 'createQuizController'
                 }).
                 when('/addQuestion',{
-                    templateUrl: 'app/addQuestion/index.html',
-                    controller: 'addQuestionController'
+                    templateUrl : 'app/addQuestion/index.html',
+                    controller  : 'addQuestionController'
                 }).
                 when('/manageQuiz/:quizId',{
-                    templateUrl: 'app/createQuiz/index.html',
-                    controller: 'createQuizController'
+                    templateUrl : 'app/createQuiz/index.html',
+                    controller  : 'createQuizController'
                 }).
+                when('/manageQuiz/:quizId/question/:questionId',{
+                    templateUrl: 'app/addQuestion/index.html',
+                    controller: 'addQuestionController'
+                }).        
                 otherwise({
-                    redirectTo: '/'
+                    redirectTo  : '/'
                 });
     }]);
 
