@@ -64,7 +64,7 @@ public class QuizREST {
         GenericEntity<Collection<Quiz>> ge = new GenericEntity<Collection<Quiz>>(quizzes){};
         if (quizzes.size()>-1) {
             Gson gson = new Gson();
-            return Response.ok(gson.toJson(ge)).build(); // 200
+            return Response.ok(gson.toJson(quizzes)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -155,7 +155,7 @@ public class QuizREST {
         quizDAO.update(quiz);
         if (quiz != null) {
             Gson gson = new Gson();
-            return Response.ok(gson.toJson(quiz)).build();// 200
+            return Response.ok().build();// 200
         } else {
             return Response.noContent().build();  // 204
         }

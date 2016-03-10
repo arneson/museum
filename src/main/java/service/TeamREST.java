@@ -70,7 +70,7 @@ public class TeamREST {
         GenericEntity<Collection<Team>> ge = new GenericEntity<Collection<Team>>(teams){};
         if (teams.size()>-1) {
             Gson gson = new Gson();
-            return Response.ok(gson.toJson(ge)).build(); // 200
+            return Response.ok(gson.toJson(teams)).build(); // 200
         } else {
             return Response.noContent().build();  // 204
         }

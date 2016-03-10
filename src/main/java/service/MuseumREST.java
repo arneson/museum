@@ -71,7 +71,7 @@ public class MuseumREST extends AuthedREST {
         GenericEntity<Collection<Museum>> ge = new GenericEntity<Collection<Museum>>(museums){};
         if (museums.size()>-1) {
             Gson gson = new Gson();
-            return Response.ok(gson.toJson(ge)).build();
+            return Response.ok(gson.toJson(museums)).build();
         } else {
             return Response.noContent().build();  // 204
         }
@@ -195,7 +195,7 @@ public class MuseumREST extends AuthedREST {
                 museumDAO.update(m);
                 if (m != null) {
                     Gson gson = new Gson();
-                    return Response.ok(gson.toJson(m)).build();
+                    return Response.ok(gson.toJson(newQuiz)).build();
                 } else {
                     return Response.noContent().build();  // 204
                 }
