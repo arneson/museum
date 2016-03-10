@@ -6,13 +6,14 @@
     
     <div class="col-md-3">
         <h3>Quiz</h3>
-        <ul class="list-group">
-            <li class="list-group-item" ng-repeat="quiz in quizzes">
-                <a href="#/manageQuiz/{{quiz.id}}">
-                    {{quiz.title}}
-                </a>    
-            </li>
-        </ul>
+        <div class="list-group">
+            <a href="#/manageQuiz/{{quiz.id}}" 
+               class="list-group-item" 
+               ng-click="saveId(quiz.id)"
+               ng-repeat="quiz in quizzes">
+                {{quiz.name}}
+            </a>    
+        </div>
         <a class="btn btn-primary" role="button" href="#/createQuiz">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
             Add New Quiz

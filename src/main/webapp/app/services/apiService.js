@@ -49,19 +49,38 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             data.description = description;
             data.password = $rootScope.currentUser.password;
             data.username = $rootScope.currentUser.username;
+            console.log("This is quiz: ", data);
             $http({
                 method  : 'POST',
-                url     : baseUrl + '/:'+$rootScope.currentUser.id+'/quizzes',
+                url     : baseUrl + '/'+$rootScope.currentUser.id+'/quizzes',
                 data    : data
             }).then(function successCallback(response){
-                console.log("posted quiz: ", response)
+                $rootScope.currentUser.quiz.push(response.data);
+                console.log("posted quiz: ", response);
             },  function errorCallback(response) {
                 console.log("could not post quiz : ", response);
             });
         },
-        addQuestion: function(question, points, correct, opt1, opt2, opt3, opt4, opt5, opt6){
-            var id = $rootScope.currentUser.id;
-            var data = {}
+        editQuiz: function(name, points, description, id){
+            var data = {};
+            data.name = name;
+            data.points = points;
+            data.description = description;
+            data.password = $rootScope.currentUser.password;
+            data.username = $rootScope.currentUser.username;
+            console.log("This is quiz: ", data);
+            $http({
+                method  : 'PUT',
+                url     : 'http://localhost:8080/museum/webresources/quiz/' +id,
+                data    : data
+            }).then(function successCallback(response){
+                console.log("Updated quiz: ", response);
+            },  function errorCallback(response) {
+                console.log("could not update quiz : ", response);
+            });
+        },
+        addQuestion: function(id, question, points, correct, opt1, opt2, opt3, opt4){
+            var data = {};
             data.question = question;
             data.points = points;
             data.options = [];
@@ -76,20 +95,17 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             data.username = $rootScope.currentUser.username;
             $http({
                 method  : 'POST',
-                url     : baseUrl + '/:'+id+'/quizzes',
+                url     : baseUrl + '/'+$rootScope.currentUser.id+'/quizzes',
                 data    : data
             }).then(function successCallback(response){
-                console.log("posted quiz: ", response)
+                console.log("posted quiz: ", response);
             },  function errorCallback(response) {
                 console.log("could not post quiz : ", response);
             });
-        }
-        
-        
-        
-        
-        
+        }     
     }
     
-    
+    var update = function(user){
+        
+    }
 }); 
