@@ -1,9 +1,7 @@
 museumApp.controller('createQuizController',
-    ['$scope','$location', 'apiService', '$rootScope',
+    ['$scope','$location', 'apiService', '$rootScope','apiService',
     
-    function($scope, $location, apiService, $rootScope){
-    //$scope.questions = 
-    
+    function($scope, $location, apiService, $rootScope, apiService){
     $scope.init = function(){
       
       if($rootScope.currentUser.quiz !== undefined){
@@ -14,16 +12,26 @@ museumApp.controller('createQuizController',
                 $scope.quiz = $rootScope.currentUser.quiz[i];
             } 
         }
+        apiService.getQuestions($rootScope.currentUser.activeQuiz).then(
+                function(res){
+                    console.log("this is res", res.data);
+                    $scope.questions = res.data;
+                },function(err){
+                    
+                });
+
       }
         
     };
     
-    $scope.routeToQuestion = function(question_id){
+    $scope.routeToQuestion = function(question){
         var address;
         
-        if(question_id){
-            address = $location.url() + '/question/' + question_id;
+        if(question){
+            $rootScope.currentUser.activeQuestion = question;
+            address = $location.url() + '/question/' + question.id;
         }else{
+            $rootScope.currentUser.activeQuestion=undefined;
             address = $location.url() + '/addQuestion';
         }
         

@@ -18,8 +18,8 @@
         <h3>Quiz</h3>
         <div class="form-group well well-sm">
             <ul class="list-group">
-                <li class="list-group-item answerOp answerOp-blue" ng-repeat="question in questions" ng-click="routeToQuestion(question.id)">
-                    {{question.text}}
+                <li class="list-group-item answerOp answerOp-blue" ng-repeat="question in questions" ng-click="routeToQuestion(question)">
+                    {{question.question}}
                 </li>
                 <li class="list-group answerOp answerOp-green answerOp-icon" ng-click="routeToQuestion()">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>

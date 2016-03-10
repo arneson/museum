@@ -118,7 +118,14 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             },  function errorCallback(response) {
                 console.log("could not post question : ", response);
             });
-        }     
+        },
+        getQuestions: function(id){
+            
+            return $http({
+                method  : 'GET',
+                url     : 'http://localhost:8080/museum/webresources/quiz/'+id+'/questions'
+            });
+        }
     }
     
     var update = function(user){
