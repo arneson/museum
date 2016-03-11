@@ -14,7 +14,9 @@ import com.ssv.museum.persistence.QuestionDAO;
 import com.ssv.museum.persistence.QuizDAO;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.json.JsonArray;
@@ -189,6 +191,21 @@ public class QuizREST extends AuthedREST{
             return Response.noContent().build();  // 204
         }
     }
+    //quiz statistics
+    @GET
+    @Path("{id: \\d+}/statistics")
+    @Produces({MediaType.APPLICATION_JSON})
+    public Response getStatistics(@PathParam("id") Long id,
+            @Context Request request) {
+        HashMap<Long,Integer> answerStatistics = quizDAO.getAnswerStatisics(id);
+        if (answerStatistics != null) {
+            Gson gson = new Gson();
+            return Response.ok(gson.toJson(answerStatistics)).build(); // 200
+        } else {
+            return Response.noContent().build();  // 204
+        }
+    }
+    
 
 
     private QuizDAO lookupQuizDAOBean() {
