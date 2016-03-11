@@ -79,43 +79,26 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 console.log("could not update quiz : ", response);
             });
         },
-        addQuestion: function(id, question, points, correct, opt1, opt2, opt3, opt4){
+        addQuestion: function(id, question, points, options,correctIndex,cb){
             console.log('this is what im doing');
             var data = {};
             data.question = question;
             data.points = points+'';
-            data.options = [
-                {
-                    "text"  : opt1
-                },
-                {
-                    "text"  : opt2
-                },
-                {
-                    "text"  : opt3,
-                },
-                {
-                    "text"  : opt4,
-                }
-            ];
-            for(var i = 0; i<data.options.length; i++){
-                if(data.options[i].text == correct){
-                    data.correct = data.options.splice(i,1)[0];
-                }
-            }
+            data.correct = options[correctIndex];
+            data.options =  options.slice(correctIndex,1);
             
             //TODO Fix options!
             //data.options.push(opt1);
-            
-            data.password = $rootScope.currentUser.password;
             data.username = $rootScope.currentUser.username;
             console.log(data);
             $http({
                 method  : 'POST',
                 url     : 'http://localhost:8080/museum/webresources/quiz/'+$rootScope.currentUser.activeQuiz+'/questions',
-                data    : data
+                data    : data,
+                headers :{"password":$rootScope.currentUser.password}
             }).then(function successCallback(response){
                 console.log("posted question: ", response);
+                cb(response.data);
             },  function errorCallback(response) {
                 console.log("could not post question : ", response);
             });

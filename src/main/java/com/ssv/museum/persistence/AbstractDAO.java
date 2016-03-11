@@ -41,6 +41,7 @@ public abstract class AbstractDAO<T, K> implements IDAO<T, K> {
     @Override
     public void update(T t) {
         getEntityManager().merge(t);
+        getEntityManager().flush();
     }
 
     @Override

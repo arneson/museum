@@ -10,10 +10,10 @@ import com.ssv.museum.core.AnswerOption;
 import com.ssv.museum.core.Museum;
 import com.ssv.museum.core.Question;
 import com.ssv.museum.core.Quiz;
+import com.ssv.museum.persistence.QuestionDAO;
 import com.ssv.museum.persistence.QuizDAO;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,6 +42,8 @@ import javax.ws.rs.core.Response;
  */
 @Path("quiz")
 public class QuizREST extends AuthedREST{
+
+    QuestionDAO questionDAO = lookupQuestionDAOBean();
 
     QuizDAO quizDAO = lookupQuizDAOBean();
     //find
@@ -162,12 +164,13 @@ public class QuizREST extends AuthedREST{
             options.get(o).setQuestion(nQuestion);
         }
         nQuestion.setQuiz(quiz);
+        questionDAO.create(nQuestion);
         quiz.addQuestion(nQuestion);
         Museum m = quiz.getMuseum();
         if (quiz != null && m!=null && authMuseum(password,m.getUsername())) {
             quizDAO.update(quiz);
             Gson gson = new Gson();
-            return Response.ok().build();// 200
+            return Response.ok(gson.toJson(nQuestion.getId())).build();// 200
         } else {
             return Response.noContent().build();  // 204
         }
@@ -192,6 +195,16 @@ public class QuizREST extends AuthedREST{
         try {
             javax.naming.Context c = new InitialContext();
             return (QuizDAO) c.lookup("java:global/Museum/QuizDAO!com.ssv.museum.persistence.QuizDAO");
+        } catch (NamingException ne) {
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
+            throw new RuntimeException(ne);
+        }
+    }
+
+    private QuestionDAO lookupQuestionDAOBean() {
+        try {
+            javax.naming.Context c = new InitialContext();
+            return (QuestionDAO) c.lookup("java:global/Museum/QuestionDAO!com.ssv.museum.persistence.QuestionDAO");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

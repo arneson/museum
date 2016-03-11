@@ -36,7 +36,7 @@ museumApp.config(['$routeProvider',
                     controller: 'addQuestionController'
                 }).        
                 otherwise({
-                    redirectTo  : '/'
+                    redirectTo  : '/login'
                 });
     }]);
 
