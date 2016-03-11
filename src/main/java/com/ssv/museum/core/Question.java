@@ -85,7 +85,7 @@ public class Question extends AbstractEntity {
 
     public BufferedImage getQR() {
         try {
-            int size = 125;
+            int size = 700;
             Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<EncodeHintType, ErrorCorrectionLevel>();
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
             BitMatrix byteMatrix = qrCodeWriter.encode("museumsjakten:"+getId().toString(),BarcodeFormat.QR_CODE, size, size, hintMap);

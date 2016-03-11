@@ -84,8 +84,8 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             var data = {};
             data.question = question;
             data.points = points+'';
-            data.correct = options[correctIndex];
-            data.options =  options.slice(correctIndex,1);
+            data.options = options.slice();
+            data.correct = data.options.splice(correctIndex,1)[0];
             
             //TODO Fix options!
             //data.options.push(opt1);

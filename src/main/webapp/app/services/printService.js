@@ -13,6 +13,6 @@ museumApp.factory('printService', function($rootScope,$http){
             "setTimeout('step2()', 10);}\n" +
             "function step2(){window.print();window.close()}\n" +
             "</scri" + "pt></head><body onload='step1()'>\n" +
-            "<img src='/museum/webresources/question/" + questionId + "/qr' /></body></html>";
+            "<img width='300' src='img/icon.png' /><img width='600' src='/museum/webresources/question/" + questionId + "/qr' /></body></html>";
           }
 });
