@@ -4,6 +4,18 @@
     Author     : Sebastian
 */
 
+.well-white{
+    background-color: white;
+}
+
+.img-container{
+    text-align: center;
+}
+
+.center-content{
+    text-align: center;
+}
+
 .navbar{
     min-height: 70px;
     border-radius: 0px;

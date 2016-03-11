@@ -48,8 +48,20 @@
         <span>question = {{question}}</span>
     </form>
 </div>
-<div class="col-md-6">
-    <img width="200" src="{{question.qr?('/museum/webresources/question/'+question.id+'/qr'):'img/icon.png'}}"/>
-    <button ng-if="question.id" ng-click="question.qr=true">Generate QR-code</button>
-    <button ng-if="question.qr" ng-click="printQR()">Print QR-code</button>
+<div class="col-md-6 well well-sm well-white">
+    <div class="center-content">
+        <img width="300" src="{{question.qr?('/museum/webresources/question/'+question.id+'/qr'):'img/icon.png'}}"/>
+    </div>
+    
+    <div class="center-content">
+        <button class="btn btn-success" ng-disabled="!question.id" ng-click="question.qr=true">
+            <span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
+            Generate QR-code
+        </button>
+        <button class="btn btn-primary" ng-disabled="!question.qr" ng-click="printQR()">
+            <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+            Print QR-code
+        </button>
+    </div>
+        
 </div>
