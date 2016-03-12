@@ -103,6 +103,30 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 console.log("could not post question : ", response);
             });
         },
+        updateQuestion: function(id, question, points, options,correctIndex,cb){
+            console.log('this is what im doing');
+            var data = {};
+            data.question = question;
+            data.points = points+'';
+            data.options = options.slice();
+            data.correct = data.options.splice(correctIndex,1)[0];
+            
+            //TODO Fix options!
+            //data.options.push(opt1);
+            data.username = $rootScope.currentUser.username;
+            console.log(data);
+            $http({
+                method  : 'PUT',
+                url     : 'http://localhost:8080/museum/webresources/quiz/'+$rootScope.currentUser.activeQuiz+'/question/'+id,
+                data    : data,
+                headers :{"password":$rootScope.currentUser.password}
+            }).then(function successCallback(response){
+                console.log("posted question: ", response);
+                cb(response.data);
+            },  function errorCallback(response) {
+                console.log("could not post question : ", response);
+            });
+        },
         getQuestions: function(id){
             
             return $http({
