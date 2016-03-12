@@ -4,7 +4,7 @@ museumApp.controller('createQuizController',
     
     var stats = {};    
     $scope.init = function(){
-        if($rootScope.currentUser.quiz !== undefined){
+        if($rootScope.currentUser && $rootScope.currentUser.quiz !== undefined){
             $scope.allStatsObjs = [];
             $scope.questions    = [];
             var url = $location.url();
