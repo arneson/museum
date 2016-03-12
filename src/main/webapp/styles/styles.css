@@ -4,6 +4,11 @@
     Author     : Sebastian
 */
 
+.img-opacity{
+    opacity: 0.4;
+    filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+
 .quiz-pie{
     padding-bottom: 20px;
 }
