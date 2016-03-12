@@ -121,10 +121,10 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 data    : data,
                 headers :{"password":$rootScope.currentUser.password}
             }).then(function successCallback(response){
-                console.log("posted question: ", response);
+                console.log("updated question: ", response);
                 cb(response.data);
             },  function errorCallback(response) {
-                console.log("could not post question : ", response);
+                console.log("could not update question : ", response);
             });
         },
         getQuestions: function(id){
