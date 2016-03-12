@@ -3,6 +3,9 @@
     Created on : 2016-mar-07, 14:44:17
     Author     : Sebastian
 */
+.backg-green{
+    background-color: #5cb85c;
+}
 
 .well-white{
     background-color: white;
@@ -19,6 +22,10 @@
 .navbar{
     min-height: 70px;
     border-radius: 0px;
+}
+
+.text-white{
+    color:white !important;
 }
 
 .sign-out-btn{
