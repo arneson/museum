@@ -1,12 +1,16 @@
 <div>
     
     <div class="col-md-12 page-header">
-       <h1>Admin Panel <small>Quiz overview</small></h1> 
+       <h1>Admin Panel</h1> 
     </div>
     
     <div class="col-md-3">
         <h3>Quiz</h3>
         <div class="list-group">
+            <a class="list-group-item backg-green text-white" href="#/createQuiz">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                Create New Quiz
+            </a>
             <a href="#/manageQuiz/{{quiz.id}}" 
                class="list-group-item" 
                ng-click="saveId(quiz.id)"
@@ -14,10 +18,13 @@
                 {{quiz.name}}
             </a>    
         </div>
+        
+        <!--
         <a class="btn btn-success" role="button" href="#/createQuiz">
             <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-            Add New Quiz
+            Create New Quiz
         </a>
+        -->
     </div>
         
     

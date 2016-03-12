@@ -1,67 +1,65 @@
-<div class="col-md-6">
-    <form role="form" id="questForm" ng-submit="submit()">
-        <div class="form-group">
-            <label for="question">Question:</label>
-            <input type="text" class="form-control" id="question" ng-model="question.question" required>        
-        </div>
-        <br>
-        <br>
-        <div class="form-group">
-            <div ng-repeat="option in question.options" class="input-group">
-                <label for="answer">Answer {{$index+1}}:</label>
-                <span class="input-group-addon">
-                    <input type="radio" name="correctAns" value="{{$index}}" ng-model="question.correctIndex">     
-                </span>
-                <input type="text" class="form-control" id="answer1" ng-model="option.text">
+<div class="col-md-12 page-header">
+    <h1>{{question.question?"Question":"Create New Question"}} <small>Overview</small></h1> 
+ </div>
 
+<div class="col-md-6">
+    <h3>Question</h3>
+    <div class="well well-sm">        
+        <form role="form" id="questForm" ng-submit="submit()">
+            <div class="form-group">
+                <label for="question">Question:</label>
+                <input type="text" class="form-control" id="question" ng-model="question.question" required>        
             </div>
-            <!--
-            <div class="input-group">
-                <label for="answer2">Answer 2:</label>
-                <span class="input-group-addon">
-                    <input type="radio" name="correctAns" ng-model="question.correctAns" value="{{question}}">     
-                </span>
-                <input type="text" class="form-control" id="answer2" ng-model="question.opt2">          
-            </div>
-            <div class="input-group">
-                <label for="answer3">Answer 3:</label>
-                <span class="input-group-addon">
-                    <input type="radio" name="correctAns" ng-model="question.correctAns" value="{{question.opt3}}">     
-                </span>
-                <input type="text" class="form-control" id="answer3" ng-model="question.opt3">          
-            </div>
-            <div class="input-group">
-                <label for="answer4">Answer 4:</label>
-                <span class="input-group-addon">
-                    <input type="radio" name="correctAns" ng-model="question.correctAns" value="{{question.opt4}}">     
-                </span>
-                <input type="text" class="form-control" id="answer4" ng-model="question.opt4">          
-            </div>-->
+            
             <br>
-            <div class="input-group">
-                <label for="points">Points :</label>
-                <input type="number" class="form-control" id="points" ng-model="question.points">          
+            
+            <h4>Answer Options <small>mark the correct answer.</small></h4>
+            <div class="form-group">
+                <div ng-repeat="option in question.options" class="input-box">
+                    <label for="answer{{$index}}">Answer {{$index+1}}:</label>
+                    <div  class="input-group">
+                        <!-- -->
+                        <span class="input-group-addon">
+                            <input type="radio" name="correctAns" value="{{$index}}" ng-model="question.correctIndex">     
+                        </span>                
+                        <input type="text" class="form-control" id="answer{{$index}}" ng-model="option.text">
+                    </div>
+                </div>
+                
+                <br>
+                
+                <div class="input-group">
+                    <label for="points">Points :</label>
+                    <input type="number" class="form-control" id="points" ng-model="question.points">          
+                </div>
             </div>
-        </div>
-        <br>
-        <input class="btn btn-success" type="submit" id="submit" value="Submit">
-        <span>question = {{question}}</span>
-    </form>
+
+            <input class="btn btn-success" type="submit" id="submit" value="Submit">
+            <a ng-click="cancel()" class="btn btn-link">Cancel</a>
+            
+            <br>
+            
+            <!--<span>question = {{question}}</span>-->
+        </form>
+    </div>  
 </div>
-<div class="col-md-6 well well-sm well-white">
-    <div class="center-content">
-        <img width="300" src="{{question.qr?('/museum/webresources/question/'+question.id+'/qr'):'img/icon.png'}}"/>
-    </div>
-    
-    <div class="center-content">
-        <button class="btn btn-success" ng-disabled="!question.id" ng-click="question.qr=true">
-            <span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
-            Generate QR-code
-        </button>
-        <button class="btn btn-primary" ng-disabled="!question.qr" ng-click="printQR()">
-            <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
-            Print QR-code
-        </button>
-    </div>
-        
+
+<div class="col-md-6">
+    <h3>QR-Code</h3>
+    <div class="well well-sm">
+        <div class="center-content qr-container">
+            <img width="300" src="{{question.qr?('/museum/webresources/question/'+question.id+'/qr'):'img/icon.png'}}"/>
+        </div>
+
+        <div class="center-content">
+            <button class="btn btn-success" ng-disabled="!question.id" ng-click="question.qr=true">
+                <span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
+                Generate QR-code
+            </button>
+            <button class="btn btn-primary" ng-disabled="!question.qr" ng-click="printQR()">
+                <span class="glyphicon glyphicon-print" aria-hidden="true"></span>
+                Print QR-code
+            </button>
+        </div> 
+    </div>     
 </div>
