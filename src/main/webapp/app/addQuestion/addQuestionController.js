@@ -58,4 +58,9 @@ museumApp.controller('addQuestionController',['$scope','$rootScope','$location',
         //Empty the question array
         //$scope.question = {};
     };
+    
+    $scope.cancel = function(){
+        var address = 'manageQuiz/' + $rootScope.currentUser.activeQuiz;
+        $location.path(address); 
+    };
 }]);    

@@ -4,6 +4,10 @@
     Author     : Sebastian
 */
 
+.input-box{
+    padding-bottom: 20px;
+}
+
 .img-opacity{
     opacity: 0.4;
     filter: alpha(opacity=40); /* For IE8 and earlier */
@@ -19,6 +23,11 @@
 
 .well-white{
     background-color: white;
+}
+
+.qr-container{
+    padding-top: 12px;
+    padding-bottom: 20px;
 }
 
 .img-container{
