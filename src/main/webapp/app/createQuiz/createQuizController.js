@@ -28,8 +28,8 @@ museumApp.controller('createQuizController',
     };
     
     //chart test
-    $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales"];
-    $scope.data = [300, 500, 100];
+    $scope.labels = ["Download Sales", "In-Store Sales", "Mail-Order Sales", 'Din mamma'];
+    $scope.data = [300, 500, 100, 200];
     
     $scope.routeToQuestion = function(question){
         var address;

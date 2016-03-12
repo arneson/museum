@@ -3,6 +3,11 @@
     Created on : 2016-mar-07, 14:44:17
     Author     : Sebastian
 */
+
+.quiz-pie{
+    padding-top: 20px;
+}
+
 .backg-green{
     background-color: #5cb85c;
 }
