@@ -1,6 +1,6 @@
 
 museumApp.factory('apiService', function($rootScope,$http,$location){
-   var baseUrl = 'http://localhost:8080/museum/webresources/museum';
+   var baseUrl = '/museum/webresources';
     return {
         
         login: function(username, password){
@@ -9,7 +9,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             data.password = password;
             $http({
                 method  : 'POST',
-                url     : baseUrl + '/login',
+                url     : baseUrl + '/museum/login',
                 data    : data
             }).then(function successCallback(response){
                 $rootScope.currentUser = response.data;
@@ -30,7 +30,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             data.email = email;
             $http({
                 method  : 'POST',
-                url     : baseUrl + '/signup',
+                url     : baseUrl + '/museum/signup',
                 data    : data
             }).then(function successCallback(response){
                 $rootScope.currentUser = response.data;
@@ -52,7 +52,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             console.log("This is quiz: ", data);
             $http({
                 method  : 'POST',
-                url     : baseUrl + '/'+$rootScope.currentUser.id+'/quizzes',
+                url     : baseUrl + '/museum/'+$rootScope.currentUser.id+'/quizzes',
                 data    : data
             }).then(function successCallback(response){
                 $rootScope.currentUser.quiz.push(response.data);
@@ -71,7 +71,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             console.log("This is quiz: ", data);
             $http({
                 method  : 'PUT',
-                url     : 'http://localhost:8080/museum/webresources/quiz/'+id,
+                url     : baseUrl+'/quiz/'+id,
                 data    : data
             }).then(function successCallback(response){
                 console.log("Updated quiz: ", response);
@@ -92,7 +92,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             console.log(data);
             $http({
                 method  : 'POST',
-                url     : 'http://localhost:8080/museum/webresources/quiz/'+$rootScope.currentUser.activeQuiz+'/questions',
+                url     : baseUrl+'/quiz/'+$rootScope.currentUser.activeQuiz+'/questions',
                 data    : data,
                 headers :{"password":$rootScope.currentUser.password}
             }).then(function successCallback(response){
@@ -116,7 +116,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             console.log(data);
             $http({
                 method  : 'PUT',
-                url     : 'http://localhost:8080/museum/webresources/quiz/'+$rootScope.currentUser.activeQuiz+'/question/'+id,
+                url     : baseUrl+'/quiz/'+$rootScope.currentUser.activeQuiz+'/question/'+id,
                 data    : data,
                 headers :{"password":$rootScope.currentUser.password}
             }).then(function successCallback(response){
@@ -130,14 +130,14 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             
             return $http({
                 method  : 'GET',
-                url     : 'http://localhost:8080/museum/webresources/quiz/'+id+'/questions'
+                url     : baseUrl+'/quiz/'+id+'/questions'
             });
         },
         getQuizStatistics: function(id){
             
             return $http({
                method   : 'GET',
-               url      : 'http://localhost:8080/museum/webresources/quiz/' + id +'/statistics' 
+               url      : baseUrl+'/quiz/' + id     +'/statistics' 
             });
         }
     }
