@@ -2,7 +2,7 @@
 <html ng-app="museumApp">
     <head>
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
-        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.css" />
         <link rel="stylesheet" type="text/css" href="styles/styles.css">
 
         
@@ -12,10 +12,10 @@
     <body>
         
         <!-- Navbar -->
-        <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default backg-green">
             <div class="container-fluid">
               <div class="navbar-header">
-                <a class="navbar-brand" href="#/login">
+                <a class="navbar-brand text-white" href="#/login">
                     <img alt="brand" class="brand-img" src="img/icon_w_text.png"/>
                     MuseumJakten
                 </a>
@@ -36,6 +36,8 @@
         <!-- External scripts -->
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-route.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+        <script src="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
         
    
         <!-- Application scripts -->
@@ -52,6 +54,7 @@
         <script src="app/register/registerController.js"></script>
         
         <!-- Application Directives -->
+        <script src="app/directives/quizPie/quizPie.js"></script>
         <script src="app/question/questionController.js"></script> 
     </body>
 </html>

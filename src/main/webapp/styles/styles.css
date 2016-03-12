@@ -4,9 +4,33 @@
     Author     : Sebastian
 */
 
+.quiz-pie{
+    padding-top: 20px;
+}
+
+.backg-green{
+    background-color: #5cb85c;
+}
+
+.well-white{
+    background-color: white;
+}
+
+.img-container{
+    text-align: center;
+}
+
+.center-content{
+    text-align: center;
+}
+
 .navbar{
     min-height: 70px;
     border-radius: 0px;
+}
+
+.text-white{
+    color:white !important;
 }
 
 .sign-out-btn{
