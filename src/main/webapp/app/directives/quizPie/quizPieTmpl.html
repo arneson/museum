@@ -1,7 +1,12 @@
 <div class="quiz-pie">
     <label>{{statsObj.questionLabel}}</label>
-    <canvas class="chart chart-pie"
+    <canvas class="chart chart-pie" ng-hide="{{statsObj.noData}}"
         chart-data="statsObj.data" chart-labels="statsObj.labels">
-    </canvas> 
+    </canvas>
+    <div class="center-content" ng-show="{{statsObj.noData}}">
+        <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"></span>
+        <p>No Statistics Available...</p>
+    </div>
+        
 </div>
  

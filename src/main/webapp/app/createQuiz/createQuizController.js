@@ -50,11 +50,14 @@ museumApp.controller('createQuizController',
             for(var j=0;j<q_ops.length;j++){
                 obj.labels.push(q_ops[j].text);
                 if(stats[q_ops[j].id]){
+                    obj.noData = false;
                    obj.data.push(stats[q_ops[j].id]);
                 }else{
                    obj.data.push(0); 
                 }
             }
+            
+            console.log(obj.noData);
             $scope.allStatsObjs.push(obj);
         }
     }
@@ -63,7 +66,8 @@ museumApp.controller('createQuizController',
         return {
                 questionLabel   : questionLabel,
                 labels          : [],
-                data            : []
+                data            : [],
+                noData          : true
             };
     }
 
