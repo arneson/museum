@@ -2,7 +2,7 @@ angular.module('museum.services')
 
 .factory('museumAPIService', function($http,$rootScope) {
     var at;
-    var url = 'http://172.20.10.2:8080/museum/webresources';
+    var url = 'http://217.208.169.8:8080/museum/webresources';
     var userId;
     return{
         login:function(at,callback){

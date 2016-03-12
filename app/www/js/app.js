@@ -17,9 +17,10 @@ angular.module('museum', ['ionic','museum.controllers', 'museum.services'])
       // a much nicer keyboard experience.
       cordova.plugins.Keyboard.disableScroll(true);
     }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
+    //if(window.StatusBar) {
+      
+      //StatusBar.styleDefault();
+    //}
   });
 })
 
