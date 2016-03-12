@@ -19,9 +19,6 @@
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.cymonit.museum"
         },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.cymonit.museum"
-        },
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.cymonit.museum"
         },
