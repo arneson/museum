@@ -80,7 +80,6 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             });
         },
         addQuestion: function(id, question, points, options,correctIndex,cb){
-            console.log('this is what im doing');
             var data = {};
             data.question = question;
             data.points = points+'';
@@ -108,6 +107,13 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             return $http({
                 method  : 'GET',
                 url     : 'http://localhost:8080/museum/webresources/quiz/'+id+'/questions'
+            });
+        },
+        getQuizStatistics: function(id){
+            
+            return $http({
+               method   : 'GET',
+               url      : 'http://localhost:8080/museum/webresources/quiz/' + id +'/statistics' 
             });
         }
     }
