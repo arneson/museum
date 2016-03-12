@@ -49,7 +49,7 @@ museumApp.controller('addQuestionController',['$scope','$rootScope','$location',
     function update() {
         //send question here
         apiService.updateQuestion(
-            $rootScope.currentUser.activeQuiz, 
+            $scope.question.id,
             $scope.question.question,
             $scope.question.points,
             $scope.question.options,
