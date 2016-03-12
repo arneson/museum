@@ -10,6 +10,7 @@ museumApp.controller('createQuizController',
             var url = $location.url();
 
             if(url.indexOf('manageQuiz') > -1){  
+                $scope.createNew = false;
                 var l = $rootScope.currentUser.quiz.length; 
 
                 for(var i=0; i < l; i++){
@@ -31,6 +32,8 @@ museumApp.controller('createQuizController',
                                 });
                         },function(err){
                 });
+            }else{
+                $scope.createNew = true;
             }
         }   
     };
