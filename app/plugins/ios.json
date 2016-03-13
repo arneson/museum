@@ -32,6 +32,9 @@
             "APP_ID": "190225798016928",
             "APP_NAME": "Museumsjakten",
             "PACKAGE_NAME": "com.cymonit.museum"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.cymonit.museumsjakten"
         }
     },
     "dependent_plugins": {}

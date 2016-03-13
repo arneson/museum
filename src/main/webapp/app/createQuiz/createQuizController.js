@@ -20,13 +20,11 @@ museumApp.controller('createQuizController',
                 }
                 apiService.getQuestions($rootScope.currentUser.activeQuiz).then(
                         function(res){
-                            console.log("this is res", res.data);
                             $scope.questions = res.data;
                         
                             apiService.getQuizStatistics($rootScope.currentUser.activeQuiz).then(
                                 function(res){
                                    stats = res.data; 
-                                   console.log('statistics', res.data); 
                                     //Create stats objects from the fetched statistics and questions
                                     createStatsObjs();
                                 });
@@ -39,8 +37,6 @@ museumApp.controller('createQuizController',
     };
     
     function createStatsObjs(){
-        console.log('createStatsObjs');
-        console.log('length of questions is: ', $scope.questions.length);
         for(var i=0; i < $scope.questions.length; i++){
             var q     = $scope.questions[i];
             var q_ops = q.options;
@@ -56,8 +52,6 @@ museumApp.controller('createQuizController',
                    obj.data.push(0); 
                 }
             }
-            
-            console.log(obj.noData);
             $scope.allStatsObjs.push(obj);
         }
     }
@@ -91,15 +85,12 @@ museumApp.controller('createQuizController',
     
     $scope.submitQuiz = function(){
         var url = $location.url();
-        console.log(url);
         if(url.indexOf('manageQuiz') > -1){
-            console.log('edit');
             apiService.editQuiz($scope.quiz.name, 
                     $scope.quiz.points +'', 
                     $scope.quiz.description, 
                     $rootScope.currentUser.activeQuiz);
         }else{
-            console.log('create');
             apiService.addQuiz($scope.quiz.name, $scope.quiz.points, $scope.quiz.description,function(){
                 backToAdminPage();
             });

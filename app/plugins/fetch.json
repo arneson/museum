@@ -65,5 +65,14 @@
             "APP_ID": "190225798016928",
             "APP_NAME": "Museumsjakten"
         }
+    },
+    "cordova-plugin-geolocation": {
+        "source": {
+            "type": "git",
+            "url": "https://github.com/apache/cordova-plugin-geolocation.git",
+            "subdir": "."
+        },
+        "is_top_level": true,
+        "variables": {}
     }
 }
