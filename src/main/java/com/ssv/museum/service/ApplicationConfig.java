@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package com.ssv.museum.service;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
@@ -29,12 +29,12 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(service.AccessControlResponseFilter.class);
-        resources.add(service.MuseumREST.class);
-        resources.add(service.QuestionREST.class);
-        resources.add(service.QuizREST.class);
-        resources.add(service.TeamREST.class);
-        resources.add(service.VisitorREST.class);
+        resources.add(com.ssv.museum.service.AccessControlResponseFilter.class);
+        resources.add(com.ssv.museum.service.MuseumREST.class);
+        resources.add(com.ssv.museum.service.QuestionREST.class);
+        resources.add(com.ssv.museum.service.QuizREST.class);
+        resources.add(com.ssv.museum.service.TeamREST.class);
+        resources.add(com.ssv.museum.service.VisitorREST.class);
     }
     
 }
