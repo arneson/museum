@@ -130,7 +130,7 @@ public class TeamREST {
     
     //addMemeber
     @POST
-    @Path("/members")
+    @Path("{id: \\d+}/members")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     public Response addMember(JsonObject obj, 

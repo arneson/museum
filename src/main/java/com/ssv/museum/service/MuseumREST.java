@@ -148,7 +148,7 @@ public class MuseumREST extends AuthedREST {
        String username = obj.getString("username");
        String description = obj.getString("description");
        JsonObject jsonAddress = obj.getJsonObject("address");
-       Address adr = new Address(name, jsonAddress.getString("city"), jsonAddress.getString("country"));
+       Address adr = new Address(jsonAddress.getString("street"), jsonAddress.getString("city"), jsonAddress.getString("country"));
        String email = obj.getString("email");
        Museum m = museumDAO.find(id);
        if (m != null) {

@@ -129,7 +129,7 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             console.log(data);
             $http({
                 method  : 'PUT',
-                url     : baseUrl+'/quiz/'+$rootScope.currentUser.activeQuiz+'/question/'+id,
+                url     : baseUrl+'/question/'+id,
                 data    : data,
                 headers :{"password":$rootScope.currentUser.password}
             }).then(function successCallback(response){
