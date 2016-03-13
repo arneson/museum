@@ -53,7 +53,7 @@ describe('addQuestionController', function(){
            var controller = $controller('addQuestionController', {$scope: $scope, $rootScope: rootScope, $location: location});
        }); 
     
-       it('calls init and sets options', function(){
+       it('calls init and sets options iff ', function(){
            var options = {
                 options:[
                     {text:"",correct:false},
@@ -65,11 +65,9 @@ describe('addQuestionController', function(){
           expect($scope.question).toEqual(options);
        });
        
-       
+
        it('should call add question', function(){
-           rootScope = {
-               'currentUser': 'someUsr'
-           };
+          
             
            $scope.submit;
            expect(mockApiService.addQuestion).toHaveBeenCalled();
