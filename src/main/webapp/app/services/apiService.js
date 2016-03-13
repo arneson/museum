@@ -41,7 +41,10 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 console.log("registerFail for: ", response);
             });
         },
-        
+        signOut: function(){
+            $rootScope.currentUser = null;
+            $location.path('/');
+        }, 
         addQuiz: function(name, points, description,callback){
             var data = {};
             data.name = name;

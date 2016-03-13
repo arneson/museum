@@ -176,10 +176,12 @@ public class QuestionREST {
             
             long answer_id  = obj.getJsonNumber("answer_id").longValue();
             long visitor_id = obj.getJsonNumber("visitor_id").longValue();
+            Double posLong = obj.getJsonNumber("longitude").doubleValue();
+            Double posLat = obj.getJsonNumber("latitude").doubleValue();
             Visitor visitor = visitorDAO.find(visitor_id);
             AnswerOption answerOption = answerOptionDAO.find(answer_id);
             boolean result = question.checkAnswer(answerOption);
-            Answer a = new Answer(answerOption, result, new Date(), new Position());
+            Answer a = new Answer(answerOption, result, new Date(), new Position(posLong,posLat));
             a.setVisitor(visitor);
             visitor.addAnswer(a);
             if(result){
