@@ -100,9 +100,11 @@ museumApp.controller('createQuizController',
                     $rootScope.currentUser.activeQuiz);
         }else{
             console.log('create');
-            apiService.addQuiz($scope.quiz.name, $scope.quiz.points, $scope.quiz.description);
+            apiService.addQuiz($scope.quiz.name, $scope.quiz.points, $scope.quiz.description,function(){
+                backToAdminPage();
+            });
         }
-        backToAdminPage()
+        
         
     };
     
