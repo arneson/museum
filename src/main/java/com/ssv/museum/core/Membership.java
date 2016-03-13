@@ -1,5 +1,5 @@
 /**
- *  * Class representing a Membership, the relation between Visitor and Team
+ * Class representing a Membership, the relation between Visitor and Team
  * @author simonarneson
  */
 package com.ssv.museum.core;
