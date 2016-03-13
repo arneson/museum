@@ -181,7 +181,7 @@ public class QuestionREST {
             Visitor visitor = visitorDAO.find(visitor_id);
             AnswerOption answerOption = answerOptionDAO.find(answer_id);
             boolean result = question.checkAnswer(answerOption);
-            Answer a = new Answer(answerOption, result, new Date(), new Position());
+            Answer a = new Answer(answerOption, result, new Date(), new Position(posLong,posLat));
             a.setVisitor(visitor);
             visitor.addAnswer(a);
             if(result){
