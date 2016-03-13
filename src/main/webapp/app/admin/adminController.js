@@ -1,5 +1,5 @@
 
-museumApp.controller('adminController',['$scope','$rootScope','$location', function($scope,$rootScope,$location){
+museumApp.controller('adminController',['$scope','$rootScope','$location','apiService', function($scope,$rootScope,$location,apiService){
     //console.log($rootScope.currentUser);
     if($rootScope.currentUser === undefined){
         $location.path('/login');
@@ -10,6 +10,7 @@ museumApp.controller('adminController',['$scope','$rootScope','$location', funct
         $scope.saveId = function(quiz_id){
             $rootScope.currentUser.activeQuiz = quiz_id;
         };
+        $rootScope.signOut = apiService.signOut;
     }
 }]);
 

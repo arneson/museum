@@ -41,8 +41,11 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 console.log("registerFail for: ", response);
             });
         },
-        
-        addQuiz: function(name, points, description){
+        signOut: function(){
+            $rootScope.currentUser = null;
+            $location.path('/');
+        }, 
+        addQuiz: function(name, points, description,callback){
             var data = {};
             data.name = name;
             data.points = points;
@@ -55,9 +58,19 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 url     : baseUrl + '/museum/'+$rootScope.currentUser.id+'/quizzes',
                 data    : data
             }).then(function successCallback(response){
-                $rootScope.currentUser.quiz.push(response.data);
+                //fetch the new quiz
+                $http({
+                    method  : 'GET',
+                    url     : baseUrl+'/quiz/'+response.data
+                }).then(function successCallback(response){
+                    $rootScope.currentUser.quiz.push(response.data);
+                    callback();
+                },  function errorCallback(response) {
+                    console.log("could not get new quiz : ", response);
+                });
                 console.log("posted quiz: ", response);
             },  function errorCallback(response) {
+                callback();
                 console.log("could not post quiz : ", response);
             });
         },
@@ -131,6 +144,13 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             return $http({
                 method  : 'GET',
                 url     : baseUrl+'/quiz/'+id+'/questions'
+            });
+        },
+        getQuiz: function(id){
+            
+            return $http({
+                method  : 'GET',
+                url     : baseUrl+'/quiz/'+id
             });
         },
         getQuizStatistics: function(id){
