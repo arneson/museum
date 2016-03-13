@@ -6,7 +6,6 @@
 package com.ssv.museum.persistence;
 
 import com.ssv.museum.core.Museum;
-import com.ssv.museum.core.Visitor;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;

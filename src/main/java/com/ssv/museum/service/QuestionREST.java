@@ -14,7 +14,6 @@ import com.ssv.museum.persistence.AnswerOptionDAO;
 import com.ssv.museum.persistence.QuestionDAO;
 import com.ssv.museum.persistence.VisitorDAO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -176,12 +175,15 @@ public class QuestionREST {
             
             long answer_id  = obj.getJsonNumber("answer_id").longValue();
             long visitor_id = obj.getJsonNumber("visitor_id").longValue();
-            Double posLong = obj.getJsonNumber("longitude").doubleValue();
-            Double posLat = obj.getJsonNumber("latitude").doubleValue();
+            Position position = new Position();
+            if(obj.containsKey("longitude") && obj.containsKey("latitude")){
+                position.setLongitude(obj.getJsonNumber("longitude").doubleValue());
+                position.setLatitude(obj.getJsonNumber("latitude").doubleValue());
+            }
             Visitor visitor = visitorDAO.find(visitor_id);
             AnswerOption answerOption = answerOptionDAO.find(answer_id);
             boolean result = question.checkAnswer(answerOption);
-            Answer a = new Answer(answerOption, result, new Date(), new Position(posLong,posLat));
+            Answer a = new Answer(answerOption, result, new Date(), position);
             a.setVisitor(visitor);
             visitor.addAnswer(a);
             if(result){

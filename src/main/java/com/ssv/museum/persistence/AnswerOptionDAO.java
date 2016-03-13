@@ -7,7 +7,6 @@ package com.ssv.museum.persistence;
 
 import com.ssv.museum.core.AnswerOption;
 import javax.ejb.Stateless;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
