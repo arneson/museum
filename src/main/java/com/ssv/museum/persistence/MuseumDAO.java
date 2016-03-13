@@ -12,7 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
+ * Data Access Object for Museum entity
+ * Also contains method findByUsernam which is Museum specific
  * @author simonarneson
  */
 @Stateless

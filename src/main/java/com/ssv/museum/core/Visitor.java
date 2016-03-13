@@ -1,4 +1,5 @@
 /**
+ *  * Class representing a Visitor, i.e. a User
  * @author larssonvictor
  */
 package com.ssv.museum.core;

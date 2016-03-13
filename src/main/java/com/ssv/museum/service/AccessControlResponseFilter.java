@@ -15,7 +15,9 @@ import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.ext.Provider;
 
 /**
- *
+ * Filter setting headers which allow CORS, Cross Origin Resource Sharing
+ * This is needed to make the REST-api endpoints accessable from
+ * other origins that this server. Without this the Visitor app would not work.
  * @author simonarneson
  */
 @Provider

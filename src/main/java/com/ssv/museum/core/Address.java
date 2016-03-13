@@ -1,4 +1,5 @@
 /**
+ * Class representing an Address
  * @author larssonvictor
  */
 package com.ssv.museum.core;

@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ssv.museum.core;
 
 /**
- *
+ * Class representing a CompletedQuiz, which creaed when i Visitor has answered
+ * all questions in a quiz
  * @author larssonvictor
  */
 import com.ssv.museum.persistence.AbstractEntity;

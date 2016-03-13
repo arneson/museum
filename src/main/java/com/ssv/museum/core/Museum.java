@@ -1,4 +1,5 @@
 /**
+* Class representing a Museum, a user type which holds Quizzes
  * @author larssonvictor
  */
 package com.ssv.museum.core;

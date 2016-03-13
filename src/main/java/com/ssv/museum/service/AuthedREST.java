@@ -21,7 +21,9 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 /**
- *
+ * Abtract class implementing methods used for authentification
+ * of different users and therefore communication with
+ * the Facebook Graph API and Hashing+Salting of passwords
  * @author simonarneson
  */
 public abstract class AuthedREST {
@@ -41,6 +43,8 @@ public abstract class AuthedREST {
     }
     public boolean authMuseum(String password, String username){
         Museum m = museumDAO.findByUsername(username);
+        //makes sure the provided password matches the salted and hashed one 
+        //stored in the database
         return m!=null && generateHash(saltPassword(password)).equals(m.getPassword());
     }
     public static String saltPassword(String input) {

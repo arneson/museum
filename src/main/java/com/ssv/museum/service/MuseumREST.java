@@ -103,6 +103,7 @@ public class MuseumREST extends AuthedREST {
             String password = obj.getString("password");
             String name = obj.getString("name");
             if (password!=null && password.length()>3 && username.length()>2) {
+                //hash and salt password before storing in DB
                 password = generateHash(saltPassword(password));
                 Museum newMuseum = new Museum(username, password,email,name);
                 museumDAO.create(newMuseum);

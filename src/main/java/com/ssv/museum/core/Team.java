@@ -1,5 +1,5 @@
 /**
- * Class representing an option (possible answer) for a question
+ * Class representing a Team
  * @author simonarneson
  */
 package com.ssv.museum.core;

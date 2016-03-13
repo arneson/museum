@@ -1,5 +1,6 @@
 /**
- * Class representing an option (possible answer) for a question
+ * Class representing a question
+ * Also contains the logic of constructing a QR-code based on an ID
  * @author simonarneson
  */
 package com.ssv.museum.core;
@@ -82,9 +83,10 @@ public class Question extends AbstractEntity {
     public String toString() {
         return "Question{" + "correctAnswer=" + correctOption.toString()+'}';
     }
-
+    //Method which generates a QR code based on the question ID using Zxing
     public BufferedImage getQR() {
         try {
+            //set pixel width/height of qr-code
             int size = 700;
             Hashtable<EncodeHintType, ErrorCorrectionLevel> hintMap = new Hashtable<EncodeHintType, ErrorCorrectionLevel>();
             QRCodeWriter qrCodeWriter = new QRCodeWriter();
@@ -97,7 +99,7 @@ public class Question extends AbstractEntity {
             graphics.setColor(Color.WHITE);
             graphics.fillRect(0, 0, CrunchifyWidth, CrunchifyWidth);
             graphics.setColor(Color.BLACK);
-            
+            //draws the generated bit pattern to a Buffered Image graphic
             for (int i = 0; i < CrunchifyWidth; i++) {
                 for (int j = 0; j < CrunchifyWidth; j++) {
                     if (byteMatrix.get(i, j)) {
@@ -105,7 +107,6 @@ public class Question extends AbstractEntity {
                     }
                 }
             }
-            System.out.println("dsf");
             return image;
         } catch (WriterException ex) {
             Logger.getLogger(Question.class.getName()).log(Level.SEVERE, null, ex);

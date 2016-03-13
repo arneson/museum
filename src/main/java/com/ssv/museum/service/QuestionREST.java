@@ -157,6 +157,8 @@ public class QuestionREST extends AuthedREST {
             AnswerOption answerOption = answerOptionDAO.find(answer_id);
             boolean result = question.checkAnswer(answerOption);
             Answer a = new Answer(answerOption, result, new Date(), position);
+            //set the vistor on the answer and vice versa to create bidirectional
+            //one to many relation
             a.setVisitor(visitor);
             visitor.addAnswer(a);
             if(result){
@@ -170,6 +172,7 @@ public class QuestionREST extends AuthedREST {
         }
     }
     //QR
+    //serves QR image data as response to the request in byte form
     @GET
     @Path("{id: \\d+}/qr")
     @Produces({MediaType.APPLICATION_JSON})

@@ -12,7 +12,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
+ * Data Access Object for Visitor entity
+ * Also contains the method findByFbId which is specific
  * @author larssonvictor
  */
 @Stateless

@@ -1,5 +1,5 @@
 /**
- * Class representing an option (possible answer) for a question
+ * Class representing an AnswerOption (possible answer) for a question
  * @author larssonvictor
  */
 package com.ssv.museum.core;
