@@ -6,7 +6,7 @@
 
 describe('loginController', function(){
     var $controller;
-    var rootScope, location;
+    var rootScope;
     var location;
     var scope;
     var mockApiService;

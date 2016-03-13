@@ -5,7 +5,7 @@
  */
 describe('adminController', function(){
     var $controller;
-    var rootScope, location;
+    var rootScope;
     var location;
     var scope;
    

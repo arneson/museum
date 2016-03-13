@@ -6,8 +6,7 @@
 
 describe('registerController', function(){
     var $controller;
-    var rootScope, location;
-    var location;
+    var rootScope;
     var scope;
     var mockApiService;
    
@@ -21,9 +20,8 @@ describe('registerController', function(){
         $provide.value('apiService', mockApiService);
     }));
     
-    beforeEach(inject(function(_$controller_, $location ){
+    beforeEach(inject(function(_$controller_){
         $controller = _$controller_;
-        location = $location; 
     }));
     describe('Register', function() {
            beforeEach(inject(function($rootScope){

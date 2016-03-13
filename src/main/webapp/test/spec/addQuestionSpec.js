@@ -6,7 +6,7 @@
 
 describe('addQuestionController', function(){
     var $controller;
-    var rootScope, location, apiService, printSer;
+    var rootScope;
     var location;
     var $scope;
     var mockApiService;
@@ -63,7 +63,7 @@ describe('addQuestionController', function(){
        });
        
        it('goes back to login screen', function() {
-           var controller = $controller('addQuestionController', {$scope: $scope,  $location: location, apiService: apiService});
+           var controller = $controller('addQuestionController', {$scope: $scope,  $location: location});
            expect(location.path()).toBe('/login');
        }); 
     });   
