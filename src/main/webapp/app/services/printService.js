@@ -5,7 +5,7 @@ museumApp.factory('printService', function($rootScope,$http){
             var pwa = window.open(Pagelink, "_new");
             pwa.document.open();
             pwa.document.write(ImagetoPrint(questionId));
-            //pwa.document.close();
+            pwa.document.close();
         }
     };
     function ImagetoPrint(questionId) {
