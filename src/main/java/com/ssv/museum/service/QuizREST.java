@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package com.ssv.museum.service;
 
 import com.google.gson.Gson;
 import com.ssv.museum.core.AnswerOption;
@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.json.JsonArray;
@@ -95,27 +94,6 @@ public class QuizREST extends AuthedREST{
             return Response.noContent().build();  // 204
         }
     }
-
-    //create
-    /*
-    This is instead done through the museums endpoint since only museums can create quizzes
-    @POST
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-    public Response create(JsonObject obj,
-                         @Context Request request) {
-        String name = obj.getString("name");
-        int points = Integer.parseInt(obj.getString("points"));
-        String description = obj.getString("description");
-        Quiz newQuiz = new Quiz(name, points, new Date(), description);
-        quizDAO.create(newQuiz);
-        if (newQuiz != null) {
-            Gson gson = new Gson();
-            return Response.ok(gson.toJson(newQuiz)).build(); // 200
-        } else {
-            return Response.noContent().build();  // 204
-        }
-    }*/
    //update
    @PUT
    @Path("{id: \\d+}")

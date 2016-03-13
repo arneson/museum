@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package service;
+package com.ssv.museum.service;
 
 import com.ssv.museum.core.Answer;
 import com.ssv.museum.core.AnswerOption;
@@ -14,7 +14,6 @@ import com.ssv.museum.persistence.AnswerOptionDAO;
 import com.ssv.museum.persistence.QuestionDAO;
 import com.ssv.museum.persistence.VisitorDAO;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,13 +41,15 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 import com.google.gson.Gson;
+import com.ssv.museum.core.Museum;
+import javax.ws.rs.HeaderParam;
 
 /**
  *
  * @author larssonvictor
  */
 @Path("question")
-public class QuestionREST {
+public class QuestionREST extends AuthedREST {
     
     //DAO
     QuestionDAO questionDAO = lookupQuestionDAOBean();
@@ -98,46 +99,17 @@ public class QuestionREST {
             return Response.noContent().build();  // 204
         }
     }
-
-    //create
-    @POST
-    @Produces({MediaType.APPLICATION_JSON})
-    @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-    public Response create(JsonObject obj,
-                         @Context Request request) {
-        
-            String question = obj.getString("question");
-            int points = Integer.parseInt(obj.getString("points"));
-            JsonArray opts = obj.getJsonArray("options");
-            AnswerOption correctOption = new AnswerOption(obj.getJsonObject("correct").getString("text"));
-            List<AnswerOption> options = new ArrayList<>();
-            Question newQuestion = new Question(question, points, options, correctOption);
-            correctOption.setQuestion(newQuestion);
-            for(int o = 0;o<opts.size();o++){
-                AnswerOption no = new AnswerOption(opts.getJsonObject(o).getString("text"));
-                no.setQuestion(newQuestion);
-                newQuestion.getOptions().add(no);
-            }
-            options.add(correctOption);
-            questionDAO.create(newQuestion);
-        if (newQuestion != null) {
-            Gson gson = new Gson();
-            return Response.ok(gson.toJson(newQuestion)).build();
-        } else {
-            return Response.noContent().build();  // 204
-        }
-    }
-    
     //update
    @PUT
    @Path("{id: \\d+}")
    @Produces({MediaType.APPLICATION_JSON})
    @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
    public Response update(@PathParam("id") Long id,
+                          @HeaderParam("password") String password,
                           JsonObject obj,@Context Request request) {
         Question q = questionDAO.find(id);
-
-        if (q != null) {
+        Museum m = q.getQuiz().getMuseum();
+        if (q != null && m!=null && authMuseum(password,m.getUsername()) ) {
             String question = obj.getString("question");
             int points = obj.getInt("points");
             JsonArray opts = obj.getJsonArray("options");
@@ -176,12 +148,15 @@ public class QuestionREST {
             
             long answer_id  = obj.getJsonNumber("answer_id").longValue();
             long visitor_id = obj.getJsonNumber("visitor_id").longValue();
-            Double posLong = obj.getJsonNumber("longitude").doubleValue();
-            Double posLat = obj.getJsonNumber("latitude").doubleValue();
+            Position position = new Position();
+            if(obj.containsKey("longitude") && obj.containsKey("latitude")){
+                position.setLongitude(obj.getJsonNumber("longitude").doubleValue());
+                position.setLatitude(obj.getJsonNumber("latitude").doubleValue());
+            }
             Visitor visitor = visitorDAO.find(visitor_id);
             AnswerOption answerOption = answerOptionDAO.find(answer_id);
             boolean result = question.checkAnswer(answerOption);
-            Answer a = new Answer(answerOption, result, new Date(), new Position(posLong,posLat));
+            Answer a = new Answer(answerOption, result, new Date(), position);
             a.setVisitor(visitor);
             visitor.addAnswer(a);
             if(result){
