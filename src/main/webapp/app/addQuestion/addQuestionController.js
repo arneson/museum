@@ -28,7 +28,7 @@ museumApp.controller('addQuestionController',['$scope','$rootScope','$location',
     if($rootScope.currentUser){
         $scope.init();
     }else{
-        $location.go('/login');
+        $location.path('/login');
     }
     $scope.printQR = function(){
         printService.PrintImage($scope.question.id);
@@ -60,6 +60,7 @@ museumApp.controller('addQuestionController',['$scope','$rootScope','$location',
     };
     
     $scope.cancel = function(){
+        console.log("cancel function called");
         var address = 'manageQuiz/' + $rootScope.currentUser.activeQuiz;
         $location.path(address); 
     };
