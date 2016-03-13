@@ -5,11 +5,42 @@
  */
 
 describe('addQuestionController', function(){
-        var $controller;
+    var $controller;
     var rootScope, location, apiService, printSer;
     var location;
     var $scope;
     var mockApiService;
+    var mockUser= {
+        currentUser:{
+            'name': 'SomeName',
+            'activeQuestion': {
+                'id': '3',
+                'points': '20',
+                'options': [
+                    {
+                        'text':'answer1',
+                        'id': '10'
+                    },
+                    {
+                        'text':'answer2',
+                        'id': '20'
+                    },
+                    {
+                        'text':'answer3',
+                        'id': '30'
+                    },
+                    {
+                        'text':'answer4',
+                        'id': '40'
+                    }
+                ],
+                correctOption: {
+                    'text': 'answer1',
+                    'id': '10'
+                }
+            }
+        }
+    }
     
     beforeEach(module('museumApp'));
     beforeEach(module(function($provide){
@@ -24,19 +55,11 @@ describe('addQuestionController', function(){
         $controller = _$controller_;
         location = $location;
     }));
-    /*beforeEach(inject(function(_$rootScope_, _$controller_, _$location_, _printService_, _apiService_){
-        $controller = _$controller_;
-        rootScope = _$rootScope_;
-        scope = rootScope.new();
-        location = _$location_;
-        apiService = _apiService_;
-        printSer = _printService_;
-    }));*/
+
     
     describe('No user', function() {
        beforeEach(function(){
-            $scope = {};
-            
+            $scope = {};    
        });
        
        it('goes back to login screen', function() {
@@ -50,10 +73,10 @@ describe('addQuestionController', function(){
             rootScope = {
                'currentUser': 'someUsr'
            };
-           var controller = $controller('addQuestionController', {$scope: $scope, $rootScope: rootScope, $location: location});
+
        }); 
-    
-       it('calls init and sets options iff ', function(){
+       
+       it('should set options to empty texts if no activeQuestion exists ', function(){
            var options = {
                 options:[
                     {text:"",correct:false},
@@ -61,16 +84,23 @@ describe('addQuestionController', function(){
                     {text:"",correct:false},
                     {text:"",correct:false}
                 ]
-            };  
-          expect($scope.question).toEqual(options);
+            };    
+            var controller = $controller('addQuestionController', {$scope: $scope, $rootScope: rootScope, $location: location});
+            expect($scope.question).toEqual(options);
        });
-       
-
-       it('should call add question', function(){
-          
-            
-           $scope.submit;
-           expect(mockApiService.addQuestion).toHaveBeenCalled();
+       it('should set scope.question.* to value of  rootScope.currentUser.activeQuestion.*', function(){
+           var rootScope = mockUser;
+           
+           var controller = $controller('addQuestionController', {$scope: $scope, $rootScope: rootScope, $location: location});
+           expect($scope.question.question).toBe(rootScope.currentUser.activeQuestion.question);
+           expect($scope.question.points).toBe(rootScope.currentUser.activeQuestion.points);
+           expect($scope.question.options).toBe(rootScope.currentUser.activeQuestion.options);
+           expect($scope.question.id).toBe(rootScope.currentUser.activeQuestion.id);
+       });
+       it('should call add question when hitting submit', function(){
+            var controller = $controller('addQuestionController', {$scope: $scope, $rootScope: rootScope, $location: location, apiService: mockApiService});
+            $scope.submit();
+            expect(mockApiService.addQuestion).toHaveBeenCalled();
        });
     });
 });
