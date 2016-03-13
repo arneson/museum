@@ -1,4 +1,5 @@
 /**
+ *  * Class representing a Visitor, i.e. a User
  * @author larssonvictor
  */
 package com.ssv.museum.core;
@@ -8,10 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 import lombok.Getter;
 import lombok.Setter;

@@ -15,8 +15,6 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 $rootScope.currentUser = response.data;
                 $rootScope.currentUser.password = password;
                 $location.path('/admin');
-                console.log("loginsuccess for: ", response.data);
-                console.log("currentUser is", $rootScope.currentUser);
             },  function errorCallback(response) {
                 console.log("loginfail for: ", response);
             });
@@ -36,7 +34,6 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 $rootScope.currentUser = response.data;
                 $rootScope.currentUser.password = password;
                 $location.path('/admin');
-                console.log("registerSuccess for: ", response.data);
             },  function errorCallback(response) {
                 console.log("registerFail for: ", response);
             });
@@ -52,7 +49,6 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             data.description = description;
             data.password = $rootScope.currentUser.password;
             data.username = $rootScope.currentUser.username;
-            console.log("This is quiz: ", data);
             $http({
                 method  : 'POST',
                 url     : baseUrl + '/museum/'+$rootScope.currentUser.id+'/quizzes',
@@ -68,7 +64,6 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 },  function errorCallback(response) {
                     console.log("could not get new quiz : ", response);
                 });
-                console.log("posted quiz: ", response);
             },  function errorCallback(response) {
                 callback();
                 console.log("could not post quiz : ", response);
@@ -81,13 +76,11 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             data.description = description;
             data.password = $rootScope.currentUser.password;
             data.username = $rootScope.currentUser.username;
-            console.log("This is quiz: ", data);
             $http({
                 method  : 'PUT',
                 url     : baseUrl+'/quiz/'+id,
                 data    : data
             }).then(function successCallback(response){
-                console.log("Updated quiz: ", response);
             },  function errorCallback(response) {
                 console.log("could not update quiz : ", response);
             });
@@ -102,21 +95,18 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             //TODO Fix options!
             //data.options.push(opt1);
             data.username = $rootScope.currentUser.username;
-            console.log(data);
             $http({
                 method  : 'POST',
                 url     : baseUrl+'/quiz/'+$rootScope.currentUser.activeQuiz+'/questions',
                 data    : data,
                 headers :{"password":$rootScope.currentUser.password}
             }).then(function successCallback(response){
-                console.log("posted question: ", response);
                 cb(response.data);
             },  function errorCallback(response) {
                 console.log("could not post question : ", response);
             });
         },
         updateQuestion: function(id, question, points, options,correctIndex,cb){
-            console.log('this is what im doing');
             var data = {};
             data.question = question;
             data.points = points+'';
@@ -124,16 +114,13 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
             data.correct = data.options.splice(correctIndex,1)[0];
             
             //TODO Fix options!
-            //data.options.push(opt1);
             data.username = $rootScope.currentUser.username;
-            console.log(data);
             $http({
                 method  : 'PUT',
-                url     : baseUrl+'/quiz/'+$rootScope.currentUser.activeQuiz+'/question/'+id,
+                url     : baseUrl+'/question/'+id,
                 data    : data,
                 headers :{"password":$rootScope.currentUser.password}
             }).then(function successCallback(response){
-                console.log("updated question: ", response);
                 cb(response.data);
             },  function errorCallback(response) {
                 console.log("could not update question : ", response);

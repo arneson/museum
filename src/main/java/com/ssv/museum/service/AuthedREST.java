@@ -12,10 +12,6 @@ import com.ssv.museum.core.Museum;
 import com.ssv.museum.core.Visitor;
 import com.ssv.museum.persistence.MuseumDAO;
 import com.ssv.museum.persistence.VisitorDAO;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
@@ -23,11 +19,11 @@ import java.util.logging.Logger;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
-import org.codehaus.jettison.json.JSONException;
-import org.codehaus.jettison.json.JSONObject;
 
 /**
- *
+ * Abtract class implementing methods used for authentification
+ * of different users and therefore communication with
+ * the Facebook Graph API and Hashing+Salting of passwords
  * @author simonarneson
  */
 public abstract class AuthedREST {
@@ -47,6 +43,8 @@ public abstract class AuthedREST {
     }
     public boolean authMuseum(String password, String username){
         Museum m = museumDAO.findByUsername(username);
+        //makes sure the provided password matches the salted and hashed one 
+        //stored in the database
         return m!=null && generateHash(saltPassword(password)).equals(m.getPassword());
     }
     public static String saltPassword(String input) {

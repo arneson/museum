@@ -41,7 +41,10 @@ museumApp.controller('addQuestionController',['$scope','$rootScope','$location',
             $scope.question.points,
             $scope.question.options,
             $scope.question.correctIndex
-            ,function(questionId){$scope.question.id=questionId}
+            ,function(questionId){
+                $scope.question.id=questionId
+                displaySuccessAlert();
+            }
         );
         //Empty the question array
         //$scope.question = {};
@@ -58,6 +61,10 @@ museumApp.controller('addQuestionController',['$scope','$rootScope','$location',
         //Empty the question array
         //$scope.question = {};
     };
+    
+    function displaySuccessAlert(){
+        //$scope.showSuccessAlert = true;
+    }
     
     $scope.cancel = function(){
         console.log("cancel function called");

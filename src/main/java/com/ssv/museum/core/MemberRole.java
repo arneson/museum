@@ -1,12 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ssv.museum.core;
 
 /**
- *
+ * Enum containing the possible Roles a Visitor can have in a team
  * @author simonarneson
  */
 public enum MemberRole {

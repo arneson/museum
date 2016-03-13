@@ -8,15 +8,12 @@ package com.ssv.museum.service;
 import com.google.gson.Gson;
 import com.ssv.museum.core.MemberRole;
 import com.ssv.museum.core.Membership;
-import com.ssv.museum.core.Quiz;
 import com.ssv.museum.core.Team;
 import com.ssv.museum.core.Visitor;
 import com.ssv.museum.persistence.TeamDAO;
 import com.ssv.museum.persistence.VisitorDAO;
-import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -133,7 +130,7 @@ public class TeamREST {
     
     //addMemeber
     @POST
-    @Path("/members")
+    @Path("{id: \\d+}/members")
     @Produces({MediaType.APPLICATION_JSON})
     @Consumes({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
     public Response addMember(JsonObject obj, 

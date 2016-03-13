@@ -7,20 +7,15 @@ package com.ssv.museum.service;
 
 import com.google.gson.Gson;
 import com.ssv.museum.core.Address;
-import com.ssv.museum.core.AnswerOption;
 import com.ssv.museum.core.Museum;
-import com.ssv.museum.core.Question;
 import com.ssv.museum.core.Quiz;
-import com.ssv.museum.core.Visitor;
 import com.ssv.museum.persistence.MuseumDAO;
 import com.ssv.museum.persistence.QuizDAO;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.json.JsonArray;
 import javax.json.JsonObject;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -108,6 +103,7 @@ public class MuseumREST extends AuthedREST {
             String password = obj.getString("password");
             String name = obj.getString("name");
             if (password!=null && password.length()>3 && username.length()>2) {
+                //hash and salt password before storing in DB
                 password = generateHash(saltPassword(password));
                 Museum newMuseum = new Museum(username, password,email,name);
                 museumDAO.create(newMuseum);
@@ -153,7 +149,7 @@ public class MuseumREST extends AuthedREST {
        String username = obj.getString("username");
        String description = obj.getString("description");
        JsonObject jsonAddress = obj.getJsonObject("address");
-       Address adr = new Address(name, jsonAddress.getString("city"), jsonAddress.getString("country"));
+       Address adr = new Address(jsonAddress.getString("street"), jsonAddress.getString("city"), jsonAddress.getString("country"));
        String email = obj.getString("email");
        Museum m = museumDAO.find(id);
        if (m != null) {
