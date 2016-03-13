@@ -6,7 +6,7 @@
 
 describe('addQuestionController', function(){
     
-    beforeEach(module('museumApp.museumApp'));
+    beforeEach(module('museumApp'));
     
     var $controller;
     var rootScope;
