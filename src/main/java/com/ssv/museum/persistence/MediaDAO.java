@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
+ * Data Access Object for Media entity
  * @author simonarneson
  */
 @Stateless

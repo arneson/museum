@@ -6,14 +6,14 @@
 package com.ssv.museum.persistence;
 
 import com.ssv.museum.core.Museum;
-import com.ssv.museum.core.Visitor;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 /**
- *
+ * Data Access Object for Museum entity
+ * Also contains method findByUsernam which is Museum specific
  * @author simonarneson
  */
 @Stateless

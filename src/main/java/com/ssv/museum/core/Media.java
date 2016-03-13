@@ -1,5 +1,5 @@
 /**
- * Class representing an media, ex. image or video
+ * Class representing a media, ex. image or video
  * @author simonarneson
  */
 package com.ssv.museum.core;

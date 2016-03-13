@@ -1,4 +1,5 @@
 /**
+* Class representing a Museum, a user type which holds Quizzes
  * @author larssonvictor
  */
 package com.ssv.museum.core;
@@ -9,7 +10,6 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;

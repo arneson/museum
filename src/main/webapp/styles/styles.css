@@ -43,6 +43,10 @@
     border-radius: 0px;
 }
 
+.navbar a{
+    cursor: pointer;
+}
+
 .navbar-user{
     padding-right: 10px;
 }

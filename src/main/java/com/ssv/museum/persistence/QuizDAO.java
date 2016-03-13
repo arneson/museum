@@ -14,7 +14,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 /**
- *
+ * Data Access Object for Quiz entity
+ * Also contains the method getAnswerStatistics which runs an SQL query
  * @author simonarneson
  */
 @Stateless
@@ -35,7 +36,9 @@ public class QuizDAO extends AbstractDAO<Quiz, Long> {
     public List<Quiz> getQuizzesByUser(Long id) {
         return null;
     }
-
+    //fetches a count of how many times each AnswerOption in the Quiz has been 
+    //selected by a Visitor using a native SQL query. 
+    //Sql-injection safe due to the Typed variable id
     public HashMap<Long, Integer> getAnswerStatisics(Long id) {
        HashMap<Long, Integer> stats = new HashMap<>();
        Query query = em.createNativeQuery("SELECT ao.ID,COUNT(*) FROM ANSWER as a INNER JOIN ANSWEROPTION as ao ON ao.ID =  a.ANSWEROPTION_ID INNER JOIN QUESTION as q ON q.ID = ao.QUESTION_ID AND q.QUIZ_ID=? GROUP BY ao.ID");

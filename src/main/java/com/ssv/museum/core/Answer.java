@@ -1,4 +1,6 @@
 /**
+ * Class representing an Answer, the relation between an AnswerOption and a 
+ * Visitor. It is created when a Visitor answers a Question
  * @author larssonvictor
  */
 package com.ssv.museum.core;

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.ssv.museum.persistence;
 import java.io.Serializable;
 import javax.persistence.GeneratedValue;
@@ -14,7 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
- * Base class for all entities, defines id, equal
+ * Base class for all entities, defines id
 
  * @author simonarneson
  */
@@ -31,7 +27,6 @@ public abstract class AbstractEntity implements Serializable {
     //@Version
     //private Long version;
     
-    // Must have default ctor (make it package private)
     protected AbstractEntity() {
     }
 
