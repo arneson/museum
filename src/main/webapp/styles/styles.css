@@ -43,12 +43,20 @@
     border-radius: 0px;
 }
 
-.text-white{
-    color:white !important;
+.navbar a{
+    cursor: pointer;
 }
 
-.sign-out-btn{
-    margin-top:8px
+.navbar-user{
+    padding-right: 10px;
+}
+
+.navbar-user-box{
+    margin-top: 16px;
+}
+
+.text-white{
+    color:white !important;
 }
 
 .page-header{
