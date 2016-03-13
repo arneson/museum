@@ -2,7 +2,9 @@ angular.module('museum.controllers')
 
 .controller('questionController', function($scope, $rootScope,$state,$stateParams,museumAPIService) {
     $scope.$on("$ionicView.beforeEnter", function() {
+        $scope.answerSet = false;
         if($stateParams.questionId){
+            $scope.question = null;
             fetchQuestion($stateParams.questionId);
         }else{
             $state.go('login');
@@ -26,7 +28,6 @@ angular.module('museum.controllers')
         });
     }
     function answerCallback(response){
-        console.log(response);
     }
     function fetchQuestion(id){
         museumAPIService.getQuestion(id,questionReceived);

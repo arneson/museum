@@ -1,6 +1,6 @@
 angular.module('museum.services')
 
-.factory('museumAPIService', function($http,$rootScope) {
+.factory('museumAPIService', function($http,$rootScope,locationService) {
     var at;
     var url = 'http://217.208.169.8:8080/museum/webresources';
     var userId;
@@ -19,9 +19,16 @@ angular.module('museum.services')
             });
         },
         answerQuestion:function(questionId,optionId,callback){
-            $http.post(url+'/question/'+questionId+'/answer',
-                    {"visitor_id":userId,"answer_id":optionId})
-                .success(callback);
+            locationService.getPosition(function(err,gps){
+                if(!err){
+                    $http.post(url+'/question/'+questionId+'/answer',
+                            {"visitor_id":userId,"answer_id":optionId,
+                            "longitude":gps.long,"latitude":gps.lat})
+                        .success(callback);
+                }else{
+                    callback(err);
+                }
+            });
         },
         getMuseums:function(callback){
             $http.get(url+'/museum/')
