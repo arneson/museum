@@ -56,7 +56,10 @@ museumApp.factory('apiService', function($rootScope,$http,$location){
                 data    : data
             }).then(function successCallback(response){
                 //fetch the new quiz
-                this.getQuiz(response.data).then(function successCallback(response){
+                $http({
+                    method  : 'GET',
+                    url     : baseUrl+'/quiz/'+response.data
+                }).then(function successCallback(response){
                     $rootScope.currentUser.quiz.push(response.data);
                     callback();
                 },  function errorCallback(response) {
